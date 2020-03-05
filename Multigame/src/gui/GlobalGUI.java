@@ -18,6 +18,7 @@ public final class GlobalGUI extends JFrame {
 
     JTabbedPane jtp;
     JPanel settings;
+    JPanel maths;
     JPanel currentActivity;
 
     /*
@@ -43,13 +44,11 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
-        // Temporaire : Affiche un message dans QnA
-        JLabel jlbl = new JLabel("LEEROY");
+        maths = new MathsQuestionsGUI();
 
         jtp = new JTabbedPane();
         //jtp.addTab("Ardoise", new ArdoiseGUI());
-        jtp.addTab("Calcul", new MathsQuestionsGUI());
-        jtp.addTab("QnA", jlbl);
+        jtp.addTab("Calcul", (JPanel) maths);
         jtp.addTab("Parametres", (JPanel) settings);
         jtp.addTab("Admin", new AdminPanelGUI());
         jtp.addChangeListener(changeListener);
@@ -70,5 +69,9 @@ public final class GlobalGUI extends JFrame {
         f.add(jtp);
         f.setJMenuBar(menu);
         f.setVisible(true);
+        /*
+        MathsQuestionsGUI test = new MathsQuestionsGUI();
+        test.generateCalcul();
+         */
     }
 }
