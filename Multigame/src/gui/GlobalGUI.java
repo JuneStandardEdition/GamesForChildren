@@ -42,7 +42,7 @@ public final class GlobalGUI extends JFrame {
             }
         };
 
-        settings = new SettingsGUI();
+        //settings = new SettingsGUI();
         // Temporaire : Affiche un message dans QnA
         JLabel jlbl = new JLabel("LEEROY");
 
@@ -50,7 +50,7 @@ public final class GlobalGUI extends JFrame {
         jtp.addTab("Ardoise", new ArdoiseGUI());
         jtp.addTab("Calcul", new MathsQuestionsGUI());
         jtp.addTab("QnA", jlbl);
-        jtp.addTab("Parametres", (JPanel) settings);
+        jtp.addTab("Parametres", new SettingsGUI());
         jtp.addTab("Admin", new AdminPanelGUI());
         jtp.addChangeListener(changeListener);
 
