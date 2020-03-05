@@ -18,8 +18,12 @@ public final class GlobalGUI extends JFrame {
 
     JTabbedPane jtp;
     JPanel settings;
+
     JPanel maths;
     JPanel currentActivity;
+
+    JPanel Ardoise;
+
 
     /*
         Global GUI
@@ -44,11 +48,22 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
+
         maths = new MathsQuestionsGUI();
 
         jtp = new JTabbedPane();
         //jtp.addTab("Ardoise", new ArdoiseGUI());
         jtp.addTab("Calcul", (JPanel) maths);
+
+        Ardoise = new ArdoiseGUI();
+        // Temporaire : Affiche un message dans QnA
+        JLabel jlbl = new JLabel("LEEROY");
+
+        jtp = new JTabbedPane();
+        jtp.addTab("Ardoise", (JPanel) Ardoise);
+        jtp.addTab("Calcul", new MathsQuestionsGUI());
+        jtp.addTab("QnA", jlbl);
+
         jtp.addTab("Parametres", (JPanel) settings);
         jtp.addTab("Admin", new AdminPanelGUI());
         jtp.addChangeListener(changeListener);

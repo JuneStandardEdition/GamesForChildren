@@ -1,110 +1,94 @@
-/*package ardoise;
+package gui;
 
-import java.applet.Applet;
+/**
+ *
+ * @author marine
+ */
+import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Label;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import javax.swing.BorderFactory;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 
 /**
- * ************************************************
- * @author June.QL
- * @version 0.1.1
- * @date 05-03-2020.09:38
+ * @param args the command line arguments
  *
- *************************************************
+ */
+public class ArdoiseGUI extends JPanel {
 
-public class Ardoise {
+    int x = 0, y = 0;
+    JPanel drawing = new JPanel();
+    JLabel label = new JLabel();
+    JPanel dessin = new JPanel();
+    Button nettoyer;
+    Choice couleurs;
 
-    public class Gribouille3 extends Applet {
+    private JComboBox liste1;
 
-        int xd, yd, x, y;
-        Color c = Color.black;
-        Button nettoyer;
-        Choice couleurs;
+    private void setLabel(int x, int y) { // afficher le JPanel en bas à gauche
+        //label.setText("Barre outils ");
+        label.setText("x=" + x + ", y=" + y);
+    }
 
-        public Gribouille3() {
-            setBackground(Color.blue);
-            nettoyer = new Button("effacer");
-            nettoyer.setForeground(Color.black);
-            nettoyer.setBackground(Color.lightGray);
-            couleurs = new Choice();
-            couleurs.addItem("black");
-            couleurs.addItem("red");
-            couleurs.addItem("yellow");
-            couleurs.addItem("green");
-            couleurs.setForeground(Color.black);
-            couleurs.setBackground(Color.lightGray);
-        }
+    public ArdoiseGUI() {
+        dessin.setBackground(Color.white);
+        drawing.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) { // récupérer les nouvelles positions de la souris et les afficher
 
-        class Appuyeur extends MouseAdapter {
-
-            public void mousePressed(MouseEvent e) {
-                xd = e.getX();
-                yd = e.getY();
-            }
-        }
-
-        class Dragueur extends MouseMotionAdapter {
-
-            public void mouseDragged(MouseEvent e) {
                 x = e.getX();
                 y = e.getY();
-                repaint();
+                setLabel(x, y);
             }
-        }
 
-        class Nettoyeur implements ActionListener {
+        });
 
-            public void actionPerformed(ActionEvent e) {
-                Graphics g = getGraphics();
-                g.clearRect(0, 0, getSize().width,
-                        getSize().height);
-                g.dispose();
+        drawing.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) { // tracer le mouvement
+                Graphics g = dessin.getGraphics();
+                g.drawLine(x, y, e.getX(), e.getY());
+                x = e.getX();
+                y = e.getY();
+                setLabel(x, y);
             }
-        }
+        });
+        setLabel(x, y);
+        drawing.setLayout(new BorderLayout()); // initialiser et positionner le container drawing
+        drawing.add(label, BorderLayout.SOUTH);
+        drawing.add(dessin, BorderLayout.CENTER);
+        drawing.setBorder(BorderFactory.createTitledBorder("Ardoise magique"));
+        drawing.setSize(800, 600);
 
-        class Coloreur implements ItemListener {
+        drawing.add(nettoyer, BorderLayout.CENTER);
 
-            public void itemStateChanged(ItemEvent e) {
-                String a = (String) e.getItem();
-                if (a.equals("black")) {
-                    c = Color.black;
-                } else if (a.equals("red")) {
-                    c = Color.red;
-                } else if (a.equals("yellow")) {
-                    c = Color.yellow;
-                } else if (a.equals("green")) {
-                    c = Color.green;
-                } else {
-                    c = Color.pink;
-                }
-            }
-        }
+        nettoyer = new Button("effacer");
+        nettoyer.setForeground(Color.black);
+        nettoyer.setBackground(Color.lightGray);
+        liste1.add(couleurs);
+        couleurs = new Choice();
+        couleurs.addItem("noir");
+        couleurs.addItem("rouge");
+        couleurs.addItem("jaune");
+        couleurs.addItem("vert");
+        couleurs.addItem("gris");
+        couleurs.addItem("orange");
+        couleurs.addItem("marron");
+        couleurs.addItem("rose");
 
-        public void init() {
-            add(nettoyer);
-            add(new Label("coloris: "));
-            add(couleurs);
-            addMouseListener(new Appuyeur());
-            addMouseMotionListener(new Dragueur());
-            nettoyer.addActionListener(new Nettoyeur());
-            couleurs.addItemListener(new Coloreur());
-        }
+        couleurs.setForeground(Color.black);
+        couleurs.setBackground(Color.lightGray);
+
+        //JFrame.setContentPane(drawing);
+        drawing.setVisible(true);
 
     }
-}*/
 
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+}

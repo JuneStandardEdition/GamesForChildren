@@ -8,6 +8,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 import javax.swing.JTextField;
 
 /**
@@ -20,6 +21,8 @@ import javax.swing.JTextField;
  */
 public class MathsQuestionsGUI extends JPanel {
 
+    JPanel afficherCalcul, boutons, saisie;
+
     public MathsQuestionsGUI() {
 
         super();
@@ -30,14 +33,13 @@ public class MathsQuestionsGUI extends JPanel {
     }
 
     private void initGUI() {
-        
+
         JPanel afficherCalcul = new JPanel();
         JPanel boutons = new JPanel();
         JPanel saisie = new JPanel();
 
         //this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
         //this.setBorder(BorderFactory.createTitledBorder("Maths"));
-
         // Jpanel pour afficher le calcul
         /**
          * **********************************************************
