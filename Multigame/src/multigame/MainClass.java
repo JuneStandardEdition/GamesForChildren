@@ -5,7 +5,7 @@ package multigame;
  * @author Le meilleur des groupes
  * @desc Application avec interface graphique, regroupant des jeux pour enfant.
  */
-public class Multigame {
+public class MainClass {
 
     /**
      * @param args the command line arguments
