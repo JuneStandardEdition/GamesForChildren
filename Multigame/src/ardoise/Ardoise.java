@@ -171,9 +171,5 @@ public class Ardoise extends JFrame {
     private void setLabel(int x, int y) {
         label.setText("x=" + x + ", y=" + y);
     }
-    // Programme principal
 
-    public static void main(String[] args) {
-        JFrame panneau = new Ardoise();
-    }
 }
