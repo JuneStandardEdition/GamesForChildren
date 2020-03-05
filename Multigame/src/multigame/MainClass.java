@@ -1,5 +1,7 @@
 package multigame;
 
+import gui.GlobalGUI;
+
 /**
  *
  * @author Le meilleur des groupes
@@ -7,12 +9,9 @@ package multigame;
  */
 public class MainClass {
 
-    /**
-     * @param args the command line arguments
-     * @version 0.1.2 : skeleton
-     */
+    
     public static void main(String[] args) {
-        // TODO
+        GlobalGUI gui = new GlobalGUI();
     }
 
 }
