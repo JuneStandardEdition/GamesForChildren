@@ -9,7 +9,7 @@ public class MainClass {
 
     /**
      * @param args the command line arguments
-     * @version 0.1.1 : initial commit
+     * @version 0.1.2 : skeleton
      */
     public static void main(String[] args) {
         // TODO

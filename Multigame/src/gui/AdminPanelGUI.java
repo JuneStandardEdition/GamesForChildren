@@ -1,16 +1,17 @@
-package settings;
+package gui;
 
 /**
  * ************************************************
  * @author June.QL
  * @version 0.1.1
- * @date 05-03-2020.09:38
+ * @date 05-03-2020.10:00
  *
  *************************************************
  */
-public class Settings {
+public class AdminPanelGUI {
 
-    void func() {
+    void initGUI() {
 
     }
+
 }

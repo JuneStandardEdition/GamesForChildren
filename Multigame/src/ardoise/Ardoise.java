@@ -10,4 +10,8 @@ package ardoise;
  */
 public class Ardoise {
 
+    void func() {
+
+    }
+
 }

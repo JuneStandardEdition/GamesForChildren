@@ -10,4 +10,7 @@ package questions;
  */
 public class Questions {
 
+    void func() {
+
+    }
 }

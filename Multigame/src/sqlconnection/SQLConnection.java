@@ -10,4 +10,7 @@ package sqlconnection;
  */
 public class SQLConnection {
 
+    void createConnection() {
+
+    }
 }
