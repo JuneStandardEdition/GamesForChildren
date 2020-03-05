@@ -11,7 +11,7 @@ package adminpanel;
 public class AdminPanel {
 
     void func() {
-
+// gestion des evenements avec ecouteurs
     }
 
 }

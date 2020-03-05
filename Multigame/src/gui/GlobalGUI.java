@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package gui;
 
 import javax.swing.BoxLayout;
@@ -26,15 +21,13 @@ public class GlobalGUI extends JFrame {
     public GlobalGUI() {
 
         JFrame f = new JFrame("Multi Game");
-        f.setSize(800,600);
+        f.setSize(800, 600);
         f.setResizable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         this.jtp = new JTabbedPane();
         jtp.setSize(800, 600);
-        
-        
-        
+
         /*
         this.adminPanel = new AdminPanelGUI();
         this.ardoise = new ArdoiseGUI();
@@ -56,6 +49,6 @@ public class GlobalGUI extends JFrame {
         f.add(jtp);
         f.setJMenuBar(menu);
         f.setVisible(true);
-    }
 
+    }
 }
