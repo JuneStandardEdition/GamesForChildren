@@ -5,7 +5,6 @@
  */
 package gui;
 
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -27,15 +26,13 @@ public class GlobalGUI extends JFrame {
     public GlobalGUI() {
 
         JFrame f = new JFrame("Multi Game");
-        f.setSize(800,600);
+        f.setSize(800, 600);
         f.setResizable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
+
         this.jtp = new JTabbedPane();
         jtp.setSize(800, 600);
-        
-        
-        
+
         /*
         this.adminPanel = new AdminPanelGUI();
         this.ardoise = new ArdoiseGUI();
