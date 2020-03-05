@@ -10,7 +10,7 @@ package calcul;
  */
 public class Calcul {
 
-    void func() {
+    void initGUI() {
 
     }
 }
