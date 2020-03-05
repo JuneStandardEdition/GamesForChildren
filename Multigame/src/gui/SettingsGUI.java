@@ -13,21 +13,14 @@ import javax.swing.*;
  */
 public class SettingsGUI extends JPanel {
 
-    /*JPanel globalSettingsPanel;
-
     public SettingsGUI() {
-        globalSettingsPanel = initSettingsGUI();
-    }
-
-    private static JPanel init*/
-    public SettingsGUI() {
+        // Calls for JPanel()
         super();
         // Global pane for Settings tab
-        setLayout(new GridLayout(1, 5));
+        setLayout(new GridLayout(5, 1));
 
         add(initLevelSelection("Calcul"));
         add(initLevelSelection("Question"));
-        //return temp;
     }
 
     /*
@@ -36,7 +29,7 @@ public class SettingsGUI extends JPanel {
      */
     private static JPanel initLevelSelection(String gameLabel) {
         JPanel levelSelection = new JPanel();
-        levelSelection.setLayout(new GridLayout(3, 1));
+        levelSelection.setLayout(new GridLayout(1, 3));
         JLabel gameNameLabel = new JLabel(gameLabel);
         // Buttons to select level of diffculty (applied to every game)
         ButtonGroup levelSelectionButtonGrp = new ButtonGroup();

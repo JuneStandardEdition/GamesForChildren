@@ -1,6 +1,8 @@
-/*package ardoise;
+package gui;
 
-import java.applet.Applet;
+import javax.swing.JPanel;
+
+/*import java.applet.Applet;
 import java.awt.Button;
 import java.awt.Choice;
 import java.awt.Color;
@@ -12,19 +14,22 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
-
+import java.awt.event.MouseMotionAdapter;*/
 /**
  * ************************************************
  * @author June.QL
  * @version 0.1.1
  * @date 05-03-2020.09:38
  *
- *************************************************
+ ************************************************
+ */
+public class ArdoiseGUI extends JPanel {
 
-public class Ardoise {
+    void initGUI() {
 
-    public class Gribouille3 extends Applet {
+    }
+
+    /*
 
         int xd, yd, x, y;
         Color c = Color.black;
@@ -100,11 +105,5 @@ public class Ardoise {
             couleurs.addItemListener(new Coloreur());
         }
 
-    }
-}*/
-
- /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+    }*/
+}
