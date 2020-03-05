@@ -13,20 +13,21 @@ import javax.swing.*;
  */
 public class SettingsGUI extends JPanel {
 
-    JPanel globalSettingsPanel;
+    /*JPanel globalSettingsPanel;
 
     public SettingsGUI() {
         globalSettingsPanel = initSettingsGUI();
     }
 
-    private static JPanel initSettingsGUI() {
+    private static JPanel init*/
+    public SettingsGUI() {
         JPanel temp = new JPanel();
         // Global pane for Settings tab
         temp.setLayout(new GridLayout(1, 5));
 
         temp.add(initLevelSelection("Calcul"));
         temp.add(initLevelSelection("Question"));
-        return temp;
+        //return temp;
     }
 
     /*

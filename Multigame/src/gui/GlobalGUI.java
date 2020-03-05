@@ -32,6 +32,7 @@ public final class GlobalGUI extends JFrame {
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
+        // Listener temporaire : Permet de voir en console le changement de tab
         ChangeListener changeListener = new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent changeEvent) {
@@ -42,6 +43,7 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
+        // Temporaire : Affiche un message dans QnA
         JLabel jlbl = new JLabel("LEEROY");
 
         jtp = new JTabbedPane();
@@ -56,13 +58,13 @@ public final class GlobalGUI extends JFrame {
         JMenu dessin = new JMenu("Dessin");
         JMenu calcul = new JMenu("Calcul");
         JMenu questions = new JMenu("Questions");
-        JMenu settings = new JMenu("Paramètres");
+        JMenu settingsMenu = new JMenu("Paramètres");
         JMenu admin = new JMenu("Administration");
 
         menu.add(dessin);
         menu.add(calcul);
         menu.add(questions);
-        menu.add(settings);
+        menu.add(settingsMenu);
         menu.add(admin);
 
         f.add(jtp);
