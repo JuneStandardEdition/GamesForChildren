@@ -1,13 +1,9 @@
 package gui;
 
-<<<<<<< HEAD
-import javax.swing.*;
-=======
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JPanel;
->>>>>>> william2
 
 /**
  * ************************************************
@@ -18,8 +14,6 @@ import javax.swing.JPanel;
  *************************************************
  */
 public class MathsQuestionsGUI extends JPanel {
-<<<<<<< HEAD
-=======
 
     JPanel afficherCalcul, boutons, saisie;
 
@@ -29,7 +23,6 @@ public class MathsQuestionsGUI extends JPanel {
         boutons = new JPanel();
         saisie = new JPanel();
     }
->>>>>>> william2
 
     void initGUI() {
 
