@@ -47,7 +47,7 @@ public final class GlobalGUI extends JFrame {
         JLabel jlbl = new JLabel("LEEROY");
 
         jtp = new JTabbedPane();
-        jtp.addTab("Ardoise", new ArdoiseGUI());
+        //jtp.addTab("Ardoise", new ArdoiseGUI());
         jtp.addTab("Calcul", new MathsQuestionsGUI());
         jtp.addTab("QnA", jlbl);
         jtp.addTab("Parametres", (JPanel) settings);

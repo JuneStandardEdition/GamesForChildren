@@ -21,12 +21,12 @@ public class SettingsGUI extends JPanel {
 
     private static JPanel init*/
     public SettingsGUI() {
-        JPanel temp = new JPanel();
+        super();
         // Global pane for Settings tab
-        temp.setLayout(new GridLayout(1, 5));
+        setLayout(new GridLayout(1, 5));
 
-        temp.add(initLevelSelection("Calcul"));
-        temp.add(initLevelSelection("Question"));
+        add(initLevelSelection("Calcul"));
+        add(initLevelSelection("Question"));
         //return temp;
     }
 
