@@ -1,5 +1,7 @@
 package gui;
 
+import javax.swing.*;
+
 /**
  * ************************************************
  * @author June.QL
@@ -8,7 +10,7 @@ package gui;
  *
  *************************************************
  */
-public class ArdoiseGUI {
+public class ArdoiseGUI extends JPanel {
 
     void initGUI() {
 
