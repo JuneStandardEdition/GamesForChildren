@@ -26,7 +26,6 @@ public class SettingsGUI extends JPanel {
 
         temp.add(initLevelSelection("Calcul"));
         temp.add(initLevelSelection("Question"));
-        temp.setVisible(true);
         return temp;
     }
 

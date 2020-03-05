@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
@@ -16,6 +17,7 @@ import javax.swing.event.ChangeListener;
 public final class GlobalGUI extends JFrame {
 
     JTabbedPane jtp;
+    JPanel settings;
     JPanel currentActivity;
 
     /*
@@ -30,19 +32,25 @@ public final class GlobalGUI extends JFrame {
 
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
-        JPanel sett = new SettingsGUI();
+        ChangeListener changeListener = new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent changeEvent) {
+                JTabbedPane sourceTabbedPane = (JTabbedPane) changeEvent.getSource();
+                int index = sourceTabbedPane.getSelectedIndex();
+                System.out.println("Tab changed to: " + sourceTabbedPane.getTitleAt(index));
+            }
+        };
+
+        settings = new SettingsGUI();
+        JLabel jlbl = new JLabel("LEEROY");
 
         jtp = new JTabbedPane();
         jtp.addTab("Ardoise", new ArdoiseGUI());
         jtp.addTab("Calcul", new MathsQuestionsGUI());
-        jtp.addTab("QnA", new MathsQuestionsGUI());
-        jtp.addTab("Parametres", sett);
+        jtp.addTab("QnA", jlbl);
+        jtp.addTab("Parametres", (JPanel) settings);
         jtp.addTab("Admin", new AdminPanelGUI());
-        /*jtp.addChangeListener((ChangeEvent ce) -> {
-            if (jtp.getSelectedIndex() == 3) {
-                currentActivity = (JPanel) jtp.getComponent(3);
-            };
-        });*/
+        jtp.addChangeListener(changeListener);
 
         JMenuBar menu = new JMenuBar();
         JMenu dessin = new JMenu("Dessin");
