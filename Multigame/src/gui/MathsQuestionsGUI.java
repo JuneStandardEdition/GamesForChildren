@@ -8,6 +8,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static settings.Settings.DIFFICULTEE_1;
 
 /**
  * ************************************************
@@ -81,35 +82,121 @@ public class MathsQuestionsGUI extends JPanel {
         add(saisie);
     }
 
-    String generateCalcul() {
-        int Max = 9;
-        int Min = 0;
-        int nb1 = 0;
-        int nb2 = 0;
+    // generation du nombre 1 selon la difficultee 
+    int genererNb1() {
 
-        int addition = 0;
-        int soustraction = 1;
+        int nb1, Max, Min;
 
-        nb1 = addition + (int) (Math.random() * ((soustraction - addition) + 1));
+        if (DIFFICULTEE_1) {
+            Max = 9;
+            Min = 0;
 
-        String calcul = "";
-
-        if (nb1 == 1) {
-            do {
-                nb1 = Min + (int) (Math.random() * ((Max - Min) + 1));
-                nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
-            } while (nb2 > nb1);
-
-            calcul = nb1 + " - " + nb2 + " = ";
-        } else {
             nb1 = Min + (int) (Math.random() * ((Max - Min) + 1));
-            nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
+        } else {
+            Max = 999;
+            Min = 0;
 
-            calcul = nb1 + " + " + nb2 + " = ";
+            nb1 = Min + (int) (Math.random() * ((Max - Min) + 1));
         }
 
-        //System.out.println(calcul);
+        return nb1;
+    }
+
+    // generation du nombre 2 selon la difficultee 
+    int genererNb2(int nb1) {
+
+        int nb2, Max, Min;
+
+        if (DIFFICULTEE_1) {
+            Max = 9;
+            Min = 0;
+
+            do {
+                nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
+            } while (nb2 > nb1);
+        } else {
+            Max = 999;
+            Min = 0;
+
+            nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
+        }
+
+        return nb2;
+    }
+
+    int genererCalculETResultat(int nb1, int nb2) {
+
+        int calcul, choixCalcul;
+        int min = 0;
+        int addition = 0;
+        int soustraction = 1;
+        
+
+        if (DIFFICULTEE_1) {
+            
+            int max = 1;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+            
+            if(choixCalcul == addition){
+                calcul = nb1 + nb2;
+            }
+            else{
+                calcul = nb1 - nb2;
+            }
+        }else{
+            
+           int max = 2;
+           choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+           
+           if(choixCalcul == addition){
+               calcul = nb1 + nb2;
+           }
+           else if(choixCalcul == soustraction){
+               calcul = nb1 - nb2;
+           }
+           else{
+               calcul = nb1 * nb2;
+           }
+        }
+
         return calcul;
+    }
+
+    String generCalcul(int nb1, int nb2) {
+
+        String afficherCalcul = "";
+        int choixCalcul;
+        int min = 0;
+        int addition = 0;
+        int soustraction = 1;
+        if (DIFFICULTEE_1) {
+            
+            int max = 1;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+            
+            if(choixCalcul == addition){
+                afficherCalcul = nb1 + "+" + nb2;
+            }
+            else{
+                afficherCalcul = nb1 + "-" + nb2;
+            }
+        }else{
+            
+           int max = 2;
+           choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+           
+           if(choixCalcul == addition){
+               afficherCalcul = nb1 + "+" + nb2;
+           }
+           else if(choixCalcul == soustraction){
+               afficherCalcul = nb1 + "-" + nb2;
+           }
+           else{
+               afficherCalcul = nb1 + "*" + nb2;
+           }
+        }
+
+        return afficherCalcul;
     }
 
 }

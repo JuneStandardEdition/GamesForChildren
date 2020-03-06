@@ -9,6 +9,8 @@ package settings;
  *************************************************
  */
 public class Settings {
+    
+    public static final  boolean DIFFICULTEE_1 = true;
 
     void func() {
 
