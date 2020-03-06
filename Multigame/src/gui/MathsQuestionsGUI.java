@@ -192,7 +192,7 @@ public class MathsQuestionsGUI extends JPanel {
     }
 
     //Fonction pr la gestion des evenements
-    private void initGUIMatch() {
+    private void initGUIMath() {
 
         JPanel afficherCalcul = new JPanel();
         JPanel boutons = new JPanel();
