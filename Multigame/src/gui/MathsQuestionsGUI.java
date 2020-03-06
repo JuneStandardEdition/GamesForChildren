@@ -1,12 +1,12 @@
 package gui;
 
-import calcul.Calcul;
 import java.awt.FlowLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import static settings.Settings.DIFFICULTEE_1;
 
 /**
  * ************************************************
@@ -27,22 +27,129 @@ public class MathsQuestionsGUI extends JPanel {
         initGUI();
     }
 
+    // generation du nombre 1 selon la difficultee 
+    public int genererNb1() {
+
+        int nb1, Max, Min;
+
+        if (DIFFICULTEE_1) {
+            Max = 9;
+            Min = 0;
+
+            nb1 = Min + (int) (Math.random() * ((Max - Min) + 1));
+        } else {
+            Max = 999;
+            Min = 0;
+
+            nb1 = Min + (int) (Math.random() * ((Max - Min) + 1));
+        }
+
+        return nb1;
+    }
+
+    // generation du nombre 2 selon la difficultee 
+    public int genererNb2(int nb1) {
+
+        int nb2, Max, Min;
+
+        if (DIFFICULTEE_1) {
+            Max = 9;
+            Min = 0;
+
+            do {
+                nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
+            } while (nb2 > nb1);
+        } else {
+            Max = 999;
+            Min = 0;
+
+            nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
+        }
+
+        return nb2;
+    }
+
+    public int genererCalculETResultat(int nb1, int nb2) {
+
+        int calcul, choixCalcul;
+        int min = 0;
+        int addition = 0;
+        int soustraction = 1;
+
+        if (DIFFICULTEE_1) {
+
+            int max = 1;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+
+            if (choixCalcul == addition) {
+                calcul = nb1 + nb2;
+            } else {
+                calcul = nb1 - nb2;
+            }
+        } else {
+
+            int max = 2;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+
+            if (choixCalcul == addition) {
+                calcul = nb1 + nb2;
+            } else if (choixCalcul == soustraction) {
+                calcul = nb1 - nb2;
+            } else {
+                calcul = nb1 * nb2;
+            }
+        }
+
+        return calcul;
+    }
+
+    public String genererCalcul(int nb1, int nb2) {
+
+        String afficherCalcul = "";
+        int choixCalcul;
+        int min = 0;
+        int addition = 0;
+        int soustraction = 1;
+        if (DIFFICULTEE_1) {
+
+            int max = 1;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+
+            if (choixCalcul == addition) {
+                afficherCalcul = nb1 + " + " + nb2 + " = ";
+            } else {
+                afficherCalcul = nb1 + " - " + nb2 + " = ";
+            }
+        } else {
+
+            int max = 2;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+
+            if (choixCalcul == addition) {
+                afficherCalcul = nb1 + " + " + nb2 + " = ";
+            } else if (choixCalcul == soustraction) {
+                afficherCalcul = nb1 + " - " + nb2 + " = ";
+            } else {
+                afficherCalcul = nb1 + " * " + nb2 + " = ";
+            }
+        }
+
+        return afficherCalcul;
+    }
+
+    //Fonction pr la gestion des evenements
     private void initGUI() {
 
         JPanel afficherCalcul = new JPanel();
-        //JPanel boutons = new JPanel();
         JPanel saisie = new JPanel();
 
-        //this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        //this.setBorder(BorderFactory.createTitledBorder("Maths"));
         // Jpanel pour afficher le calcul
         /**
          * **********************************************************
          */
         afficherCalcul.setLayout(new FlowLayout(FlowLayout.LEFT));
-        Calcul test = new Calcul();
 
-        String calcul = test.genererCalcul(test.genererNb1(), test.genererNb2(test.genererNb1()));
+        String calcul = genererCalcul(genererNb1(), genererNb2(genererNb1()));
 
         JLabel calc = new JLabel(calcul, JLabel.LEFT);
         afficherCalcul.add(calc);
@@ -58,16 +165,6 @@ public class MathsQuestionsGUI extends JPanel {
         ButtonsGUI boutons = new ButtonsGUI();
         add(boutons.creerBoutons("calcul"));
 
-        /*
-        boutons.setLayout(new GridLayout(0, 3));
-        JButton verif = new JButton("Verification");
-        JButton solution = new JButton("Solution");
-        JButton questionSuivante = new JButton("Autre calcul");
-        boutons.add(verif);
-        boutons.add(solution);
-        boutons.add(questionSuivante);
-        
-         */
         /**
          * **********************************************************
          */
@@ -88,4 +185,5 @@ public class MathsQuestionsGUI extends JPanel {
         add(boutons);
         add(saisie);
     }
+
 }
