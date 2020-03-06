@@ -21,8 +21,9 @@ public final class GlobalGUI extends JFrame {
     JPanel maths;
     JPanel ardoise;
 
+
     /*
-     *  Global GUI
+     * Global GUI
      */
     public GlobalGUI() {
 
@@ -46,8 +47,6 @@ public final class GlobalGUI extends JFrame {
         settings = new SettingsGUI();
         maths = new MathsQuestionsGUI();
         ardoise = new ArdoiseGUI();
-
-        jtp = new JTabbedPane();
 
         // Temporaire : Affiche un message dans QnA
         JLabel jlbl = new JLabel("LEEROY");
