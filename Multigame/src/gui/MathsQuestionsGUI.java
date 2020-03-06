@@ -1,6 +1,7 @@
 package gui;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -48,7 +49,9 @@ public class MathsQuestionsGUI extends JPanel {
         // Génère une String d'un Calcul ou d'une Question
         JLabel labelProblemString = new JLabel();
         if (this.mathsOrQuestion) {
-            labelProblemString.setText(genererCalcul(genererNb1(), genererNb2(genererNb1())));
+            int nb1 = genererNb1();
+            int nb2 = genererNb2();
+            labelProblemString.setText(genererCalcul(nb1, nb2));
         } else {
             labelProblemString.setText(genererQuestion());
         }
@@ -56,12 +59,27 @@ public class MathsQuestionsGUI extends JPanel {
 
         // JPanel pour afficher les boutons d'options
         // Appel fonction creerBoutons
-        ButtonsGUI boutons = new ButtonsGUI();
-        if (this.mathsOrQuestion) {
-            add(boutons.creerBoutons("calcul"));
-        } else {
-            add(boutons.creerBoutons("question"));
-        }
+        // ButtonsGUI boutons = new ButtonsGUI();
+        JPanel buttonsPane = new JPanel();
+        buttonsPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JButton verif = new JButton("Verification");
+        JButton solution = new JButton("Solution");
+        JButton questionSuivante = new JButton("Suivant");
+        verif.setPreferredSize(new Dimension(200, 75));
+        solution.setPreferredSize(new Dimension(200, 75));
+        questionSuivante.setPreferredSize(new Dimension(200, 75));
+        questionSuivante.addActionListener((ActionEvent ae) -> {
+            if (this.mathsOrQuestion) {
+                int nb1 = genererNb1();
+                int nb2 = genererNb2();
+                labelProblemString.setText(genererCalcul(nb1, nb2));
+            } else {
+                labelProblemString.setText(genererQuestion());
+            }
+        });
+        buttonsPane.add(verif);
+        buttonsPane.add(solution);
+        buttonsPane.add(questionSuivante);
 
         // Jpanel pour la saisie utilisateur
         saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -72,7 +90,7 @@ public class MathsQuestionsGUI extends JPanel {
 
         add(problemLabelPane);
         add(saisiePane);
-        add(boutons);
+        add(buttonsPane);
     }
 
     public String genererQuestion() {
@@ -81,46 +99,30 @@ public class MathsQuestionsGUI extends JPanel {
 
     }
 
-    // generation du nombre 1 selon la difficulté
+    // Génération du nombre 1 selon la difficulté
     public int genererNb1() {
-
-        int nb1, Max, Min;
-
+        int i;
         if (DIFFICULTE_1) {
-            Max = 9;
-            Min = 0;
-
-            nb1 = Min + (int) (Math.random() * ((Max - Min) + 1));
+            Random rd = new Random();
+            i = rd.nextInt(9);
         } else {
-            Max = 999;
-            Min = 0;
-
-            nb1 = Min + (int) (Math.random() * ((Max - Min) + 1));
+            Random rd = new Random();
+            i = rd.nextInt(999);
         }
-
-        return nb1;
+        return i;
     }
 
-    // generation du nombre 2 selon la difficulté
-    public int genererNb2(int nb1) {
-
-        int nb2, Max, Min;
-
+    // Génération du nombre 2 selon la difficulté
+    public int genererNb2() {
+        int i;
         if (DIFFICULTE_1) {
-            Max = 9;
-            Min = 0;
-
-            do {
-                nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
-            } while (nb2 > nb1);
+            Random rd = new Random();
+            i = rd.nextInt(9);
         } else {
-            Max = 999;
-            Min = 0;
-
-            nb2 = Min + (int) (Math.random() * ((Max - Min) + 1));
+            Random rd = new Random();
+            i = rd.nextInt(999);
         }
-
-        return nb2;
+        return i;
     }
 
     public int genererCalculETResultat(int nb1, int nb2) {
@@ -204,7 +206,7 @@ public class MathsQuestionsGUI extends JPanel {
          */
         afficherCalcul.setLayout(new FlowLayout(FlowLayout.LEFT));
 
-        String calcul = genererCalcul(genererNb1(), genererNb2(genererNb1()));
+        String calcul = genererCalcul(genererNb1(), genererNb2());
 
         JLabel calc = new JLabel(calcul, JLabel.LEFT);
         afficherCalcul.add(calc);
