@@ -28,6 +28,7 @@ public class ButtonsGUI extends JPanel {
         JButton verif = new JButton("Verification");
         JButton solution = new JButton("Solution");
         JButton questionSuivante = new JButton("Autre " + button3);
+        
         this.add(verif);
         this.add(solution);
         this.add(questionSuivante);
