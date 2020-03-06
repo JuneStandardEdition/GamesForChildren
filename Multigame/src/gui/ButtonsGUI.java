@@ -1,16 +1,12 @@
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-
 package gui;
 
-import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import gui.MathsQuestionsGUI;
+import java.lang.Class;
 
 /**
  *
@@ -25,18 +21,23 @@ public class ButtonsGUI extends JPanel {
         //add(creerBoutons("calcul"));
     }
 
-    public JPanel creerBoutons(String button3) {
+    public JPanel creerBoutons() {
 
-        this.setLayout(new GridLayout(0, 3));
+        this.setLayout(new FlowLayout(FlowLayout.CENTER));
         JButton verif = new JButton("Verification");
         JButton solution = new JButton("Solution");
-        JButton questionSuivante = new JButton("Autre " + button3);
-        
+        JButton questionSuivante = new JButton("Suivant");
+        verif.setPreferredSize(new Dimension(200, 75));
+        solution.setPreferredSize(new Dimension(200, 75));
+        questionSuivante.setPreferredSize(new Dimension(200, 75));
+        /*questionSuivante.addActionListener((ActionEvent ae) -> {
+
+        });*/
+
         this.add(verif);
         this.add(solution);
         this.add(questionSuivante);
 
         return this;
     }
-
 }
