@@ -18,10 +18,11 @@ public final class GlobalGUI extends JFrame {
 
     JTabbedPane jtp;
     JPanel settings;
-    JPanel currentActivity;
+    JPanel maths;
+    JPanel ardoise;
 
     /*
-        Global GUI
+     *  Global GUI
      */
     public GlobalGUI() {
 
@@ -42,18 +43,24 @@ public final class GlobalGUI extends JFrame {
             }
         };
 
-        //settings = new SettingsGUI();
+        settings = new SettingsGUI();
+        maths = new MathsQuestionsGUI();
+        ardoise = new ArdoiseGUI();
+
+        jtp = new JTabbedPane();
+
         // Temporaire : Affiche un message dans QnA
         JLabel jlbl = new JLabel("LEEROY");
 
         jtp = new JTabbedPane();
-        //jtp.addTab("Ardoise", new ArdoiseGUI());
-        jtp.addTab("Calcul", new MathsQuestionsGUI());
+        jtp.addTab("Ardoise", (JPanel) ardoise);
+        jtp.addTab("Calcul", (JPanel) maths);
         jtp.addTab("QnA", jlbl);
-        jtp.addTab("Parametres", new SettingsGUI());
+        jtp.addTab("Parametres", (JPanel) settings);
         jtp.addTab("Admin", new AdminPanelGUI());
         jtp.addChangeListener(changeListener);
 
+        // Menus top of the JFrame
         JMenuBar menu = new JMenuBar();
         JMenu dessin = new JMenu("Dessin");
         JMenu calcul = new JMenu("Calcul");
@@ -61,12 +68,14 @@ public final class GlobalGUI extends JFrame {
         JMenu settingsMenu = new JMenu("Paramètres");
         JMenu admin = new JMenu("Administration");
 
+        // Adds Menus
         menu.add(dessin);
         menu.add(calcul);
         menu.add(questions);
         menu.add(settingsMenu);
         menu.add(admin);
 
+        // Adds content to JFrame and sets it visible
         f.add(jtp);
         f.setJMenuBar(menu);
         f.setVisible(true);

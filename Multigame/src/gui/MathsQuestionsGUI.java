@@ -1,9 +1,13 @@
 package gui;
 
-import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  * ************************************************
@@ -15,24 +19,66 @@ import javax.swing.JPanel;
  */
 public class MathsQuestionsGUI extends JPanel {
 
-    JPanel afficherCalcul, boutons, saisie;
-
     public MathsQuestionsGUI() {
 
-        afficherCalcul = new JPanel();
-        boutons = new JPanel();
-        saisie = new JPanel();
+        super();
+        setBorder(BorderFactory.createTitledBorder("Maths"));
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        initGUI();
     }
 
-    void initGUI() {
+    private void initGUI() {
 
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        this.setBorder(BorderFactory.createTitledBorder("Maths"));
+        JPanel afficherCalcul = new JPanel();
+        JPanel boutons = new JPanel();
+        JPanel saisie = new JPanel();
 
-        afficherCalcul.setLayout(new BorderLayout());
+        //this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        //this.setBorder(BorderFactory.createTitledBorder("Maths"));
+        // Jpanel pour afficher le calcul
+        /**
+         * **********************************************************
+         */
+        afficherCalcul.setLayout(new FlowLayout(FlowLayout.LEFT));
         String calcul = generateCalcul();
-        afficherCalcul.add(calcul, this);
+        JLabel calc = new JLabel(calcul, JLabel.LEFT);
+        afficherCalcul.add(calc);
+        /**
+         * **********************************************************
+         */
 
+        //Jpanel pour afficher les boutons d'options
+        /**
+         * **********************************************************
+         */
+        boutons.setLayout(new GridLayout(0, 3));
+        JButton verif = new JButton("Verification");
+        JButton solution = new JButton("Solution");
+        JButton questionSuivante = new JButton("Suivante");
+        boutons.add(verif);
+        boutons.add(solution);
+        boutons.add(questionSuivante);
+        /**
+         * **********************************************************
+         */
+
+        //Jpanel pour la saisie utilisateur
+        /**
+         * **********************************************************
+         */
+        saisie.setLayout(new FlowLayout(FlowLayout.LEFT));
+        JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.LEFT);
+        JTextField saisie_utilisateur = new JTextField(15);
+        saisie.add(reponse);
+        saisie.add(saisie_utilisateur);
+        /**
+         * ***********************************************************
+         */
+
+        add(afficherCalcul);
+        add(boutons);
+        add(saisie);
     }
 
     String generateCalcul() {
@@ -46,7 +92,7 @@ public class MathsQuestionsGUI extends JPanel {
 
         nb1 = addition + (int) (Math.random() * ((soustraction - addition) + 1));
 
-        String calcul = null;
+        String calcul = "";
 
         if (nb1 == 1) {
             do {
@@ -61,6 +107,8 @@ public class MathsQuestionsGUI extends JPanel {
 
             calcul = nb1 + " + " + nb2 + " = ";
         }
+
+        //System.out.println(calcul);
         return calcul;
     }
 

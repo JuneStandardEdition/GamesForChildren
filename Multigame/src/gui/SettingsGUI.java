@@ -6,7 +6,7 @@ import javax.swing.*;
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.1
+ * @version 0.2.1: Stable build, todo: appearance
  * @date 05-03-2020.10:00
  *
  *************************************************
@@ -19,13 +19,15 @@ public class SettingsGUI extends JPanel {
         // Global pane for Settings tab
         setLayout(new GridLayout(5, 1));
 
+        // Adds JPanel to SettingsGUI
         add(initLevelSelection("Calcul"));
         add(initLevelSelection("Question"));
     }
 
     /*
-        String gameLabel : Nom du jeu
-        Inits RadioButtons & Label
+     * String gameLabel : Nom du jeu
+     * Inits RadioButtons & Label
+     * @args String gameLabel: prints label into settings pane
      */
     private static JPanel initLevelSelection(String gameLabel) {
         JPanel levelSelection = new JPanel();
