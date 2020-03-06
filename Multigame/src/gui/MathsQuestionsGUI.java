@@ -42,7 +42,7 @@ public class MathsQuestionsGUI extends JPanel {
          * **********************************************************
          */
         afficherCalcul.setLayout(new FlowLayout(FlowLayout.LEFT));
-        String calcul = generateCalcul();
+        String calcul = genererCalcul(genererNb1(), genererNb2(genererNb1()));
         JLabel calc = new JLabel(calcul, JLabel.LEFT);
         afficherCalcul.add(calc);
         /**
@@ -162,7 +162,7 @@ public class MathsQuestionsGUI extends JPanel {
         return calcul;
     }
 
-    String generCalcul(int nb1, int nb2) {
+    String genererCalcul(int nb1, int nb2) {
 
         String afficherCalcul = "";
         int choixCalcul;
@@ -175,10 +175,10 @@ public class MathsQuestionsGUI extends JPanel {
             choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
             
             if(choixCalcul == addition){
-                afficherCalcul = nb1 + "+" + nb2;
+                afficherCalcul = nb1 + " + " + nb2;
             }
             else{
-                afficherCalcul = nb1 + "-" + nb2;
+                afficherCalcul = nb1 + " - " + nb2;
             }
         }else{
             
