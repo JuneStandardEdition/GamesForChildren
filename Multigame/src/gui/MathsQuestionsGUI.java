@@ -32,7 +32,7 @@ public class MathsQuestionsGUI extends JPanel {
     private void initGUI() {
 
         JPanel afficherCalcul = new JPanel();
-        JPanel boutons = new JPanel();
+        //JPanel boutons = new JPanel();
         JPanel saisie = new JPanel();
 
         //this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
@@ -53,17 +53,23 @@ public class MathsQuestionsGUI extends JPanel {
         /**
          * **********************************************************
          */
+        //essaie appels fonction creerBoutons
+        ButtonsGUI boutons = new ButtonsGUI();
+        add(boutons.creerBoutons("calcul"));
+
+        /*
         boutons.setLayout(new GridLayout(0, 3));
         JButton verif = new JButton("Verification");
         JButton solution = new JButton("Solution");
-        JButton questionSuivante = new JButton("Suivante");
+        JButton questionSuivante = new JButton("Autre calcul");
         boutons.add(verif);
         boutons.add(solution);
         boutons.add(questionSuivante);
+        
+         */
         /**
          * **********************************************************
          */
-
         //Jpanel pour la saisie utilisateur
         /**
          * **********************************************************
@@ -130,33 +136,29 @@ public class MathsQuestionsGUI extends JPanel {
         int min = 0;
         int addition = 0;
         int soustraction = 1;
-        
 
         if (DIFFICULTEE_1) {
-            
+
             int max = 1;
             choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-            
-            if(choixCalcul == addition){
+
+            if (choixCalcul == addition) {
                 calcul = nb1 + nb2;
-            }
-            else{
+            } else {
                 calcul = nb1 - nb2;
             }
-        }else{
-            
-           int max = 2;
-           choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-           
-           if(choixCalcul == addition){
-               calcul = nb1 + nb2;
-           }
-           else if(choixCalcul == soustraction){
-               calcul = nb1 - nb2;
-           }
-           else{
-               calcul = nb1 * nb2;
-           }
+        } else {
+
+            int max = 2;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+
+            if (choixCalcul == addition) {
+                calcul = nb1 + nb2;
+            } else if (choixCalcul == soustraction) {
+                calcul = nb1 - nb2;
+            } else {
+                calcul = nb1 * nb2;
+            }
         }
 
         return calcul;
@@ -170,30 +172,27 @@ public class MathsQuestionsGUI extends JPanel {
         int addition = 0;
         int soustraction = 1;
         if (DIFFICULTEE_1) {
-            
+
             int max = 1;
             choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-            
-            if(choixCalcul == addition){
-                afficherCalcul = nb1 + " + " + nb2;
+
+            if (choixCalcul == addition) {
+                afficherCalcul = nb1 + " + " + nb2 + " = ";
+            } else {
+                afficherCalcul = nb1 + " - " + nb2 + " = ";
             }
-            else{
-                afficherCalcul = nb1 + " - " + nb2;
+        } else {
+
+            int max = 2;
+            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+
+            if (choixCalcul == addition) {
+                afficherCalcul = nb1 + " + " + nb2 + " = ";
+            } else if (choixCalcul == soustraction) {
+                afficherCalcul = nb1 + " - " + nb2 + " = ";
+            } else {
+                afficherCalcul = nb1 + " * " + nb2 + " = ";
             }
-        }else{
-            
-           int max = 2;
-           choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-           
-           if(choixCalcul == addition){
-               afficherCalcul = nb1 + "+" + nb2;
-           }
-           else if(choixCalcul == soustraction){
-               afficherCalcul = nb1 + "-" + nb2;
-           }
-           else{
-               afficherCalcul = nb1 + "*" + nb2;
-           }
         }
 
         return afficherCalcul;
