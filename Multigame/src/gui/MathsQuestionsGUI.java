@@ -50,7 +50,7 @@ public class MathsQuestionsGUI extends JPanel {
         JLabel labelProblemString = new JLabel();
         if (this.mathsOrQuestion) {
             int nb1 = genererNb1();
-            int nb2 = genererNb2();
+            int nb2 = genererNb2(nb1);
             labelProblemString.setText(genererCalcul(nb1, nb2));
         } else {
             labelProblemString.setText(genererQuestion());
@@ -71,7 +71,7 @@ public class MathsQuestionsGUI extends JPanel {
         questionSuivante.addActionListener((ActionEvent ae) -> {
             if (this.mathsOrQuestion) {
                 int nb1 = genererNb1();
-                int nb2 = genererNb2();
+                int nb2 = genererNb2(nb1);
                 labelProblemString.setText(genererCalcul(nb1, nb2));
             } else {
                 labelProblemString.setText(genererQuestion());
@@ -113,11 +113,14 @@ public class MathsQuestionsGUI extends JPanel {
     }
 
     // Génération du nombre 2 selon la difficulté
-    public int genererNb2() {
+    public int genererNb2(int nb1) {
         int i;
         if (DIFFICULTE_1) {
-            Random rd = new Random();
+            do{
+                Random rd = new Random();
             i = rd.nextInt(9);
+            }while(i > nb1);
+            
         } else {
             Random rd = new Random();
             i = rd.nextInt(999);
@@ -125,7 +128,7 @@ public class MathsQuestionsGUI extends JPanel {
         return i;
     }
 
-    public int genererCalculETResultat(int nb1, int nb2) {
+    public int genererCalcull(int nb1, int nb2) {
 
         int calcul, choixCalcul;
         int min = 0;
@@ -193,6 +196,9 @@ public class MathsQuestionsGUI extends JPanel {
         return afficherCalcul;
     }
 
+    
+    /*
+   
     //Fonction pr la gestion des evenements
     private void initGUIMath() {
 
@@ -201,38 +207,25 @@ public class MathsQuestionsGUI extends JPanel {
         JPanel saisie = new JPanel();
 
         // Jpanel pour afficher le calcul
-        /**
-         * **********************************************************
-         */
+       
         afficherCalcul.setLayout(new FlowLayout(FlowLayout.LEFT));
 
         String calcul = genererCalcul(genererNb1(), genererNb2());
 
         JLabel calc = new JLabel(calcul, JLabel.LEFT);
         afficherCalcul.add(calc);
-        /**
-         * **********************************************************
-         */
-        /**
-         * **********************************************************
-         */
+       
         //Jpanel pour la saisie utilisateur
-        /**
-         * **********************************************************
-         */
+        
         saisie.setLayout(new FlowLayout(FlowLayout.LEFT));
         JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.LEFT);
         JTextField saisie_utilisateur = new JTextField(15);
         saisie.add(reponse);
         saisie.add(saisie_utilisateur);
-        /**
-         * ***********************************************************
-         */
+        
 
         //Jpanel pour afficher les boutons d'options
-        /**
-         * **********************************************************
-         */
+        
         //essaie appels fonction creerBoutons
         //ButtonsGUI boutons = new ButtonsGUI();
         //add(boutons.creerBoutons("calcul"));
@@ -240,7 +233,7 @@ public class MathsQuestionsGUI extends JPanel {
         JButton verif = new JButton("Verification");
         verif.addActionListener((ActionEvent ae) -> {
 
-            if (saisie_utilisateur.getText().equals(genererCalculETResultat(5, 3))) {
+            if (saisie_utilisateur.getText().equals(genererCalcull(5, 3))) {
                 verif.setBackground(Color.GREEN);
             } else {
                 verif.setBackground(Color.RED);
@@ -258,4 +251,7 @@ public class MathsQuestionsGUI extends JPanel {
         add(boutons);
         add(saisie);
     }
+
+    */
+
 }
