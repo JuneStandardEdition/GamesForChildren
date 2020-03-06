@@ -1,8 +1,12 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -141,6 +145,7 @@ public class MathsQuestionsGUI extends JPanel {
     private void initGUI() {
 
         JPanel afficherCalcul = new JPanel();
+        JPanel boutons = new JPanel();
         JPanel saisie = new JPanel();
 
         // Jpanel pour afficher le calcul
@@ -156,16 +161,7 @@ public class MathsQuestionsGUI extends JPanel {
         /**
          * **********************************************************
          */
-
-        //Jpanel pour afficher les boutons d'options
-        /**
-         * **********************************************************
-         */
-        //essaie appels fonction creerBoutons
-        ButtonsGUI boutons = new ButtonsGUI();
-        add(boutons.creerBoutons("calcul"));
-
-        /**
+/**
          * **********************************************************
          */
         //Jpanel pour la saisie utilisateur
@@ -180,6 +176,37 @@ public class MathsQuestionsGUI extends JPanel {
         /**
          * ***********************************************************
          */
+        
+       
+        //Jpanel pour afficher les boutons d'options
+        /**
+         * **********************************************************
+         */
+        //essaie appels fonction creerBoutons
+        //ButtonsGUI boutons = new ButtonsGUI();
+        //add(boutons.creerBoutons("calcul"));
+        boutons.setLayout(new GridLayout(0, 3));
+        JButton verif = new JButton("Verification");
+        verif.addActionListener((ActionEvent ae) -> {
+            
+            if(saisie_utilisateur.getText().equals(genererCalculETResultat(5, 3))){
+                verif.setBackground(Color.GREEN);
+            }
+            else{
+                verif.setBackground(Color.RED);
+            }
+        });
+        
+        JButton solution = new JButton("Solution");
+        JButton questionSuivante = new JButton("Autre calcul");
+
+        boutons.add(verif);
+        boutons.add(solution);
+        boutons.add(questionSuivante);
+        
+        
+
+        
 
         add(afficherCalcul);
         add(boutons);
