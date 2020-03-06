@@ -6,7 +6,7 @@ import gui.GlobalGUI;
  *
  * @author Le meilleur des groupes
  * @desc Application avec interface graphique, regroupant des jeux pour enfant.
- * @version 0.2.3: DESSIN
+ * @version 0.2.4: Properties file
  */
 public class MainClass {
 
