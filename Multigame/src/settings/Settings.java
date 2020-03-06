@@ -10,7 +10,7 @@ package settings;
  */
 public class Settings {
     
-    public static final  boolean DIFFICULTEE_1 = true;
+    public static final  boolean DIFFICULTE_1 = true;
 
     // Defines difficulty for Maths game: false is level 1, true is level 2
     boolean mathsDifficulty;

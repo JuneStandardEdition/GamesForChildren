@@ -18,6 +18,13 @@ public class Questions {
     public Questions() {
     }
 
+    public Questions(Integer id, String qst, String ans, Integer diff) {
+        this.id = id;
+        this.question = qst;
+        this.answer = ans;
+        this.difficulty = diff;
+    }
+
     /* GETTERS */
     public Integer getId() {
         return id;
@@ -36,6 +43,10 @@ public class Questions {
     }
 
     /* SETTERS */
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public void setQuestion(String question) {
         this.question = question;
     }
@@ -46,6 +57,11 @@ public class Questions {
 
     public void setDifficulty(Integer difficulty) {
         this.difficulty = difficulty;
+    }
+
+    @Override
+    public String toString() {
+        return "Questions{" + "id=" + id + ", question=" + question + ", answer=" + answer + ", difficulty=" + difficulty + '}';
     }
 
     // I don't even know if we will need this but, we never know right.

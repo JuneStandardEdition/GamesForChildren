@@ -19,8 +19,8 @@ public final class GlobalGUI extends JFrame {
     JTabbedPane jtp;
     JPanel settings;
     JPanel maths;
+    JPanel qust;
     JPanel ardoise;
-
 
     /*
      * Global GUI
@@ -45,7 +45,8 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
-        maths = new MathsQuestionsGUI();
+        maths = new MathsQuestionsGUI("Maths", true);
+        qust = new MathsQuestionsGUI("QnA", false);
         ardoise = new ArdoiseGUI();
 
         // Temporaire : Affiche un message dans QnA
@@ -54,7 +55,7 @@ public final class GlobalGUI extends JFrame {
         jtp = new JTabbedPane();
         jtp.addTab("Ardoise", (JPanel) ardoise);
         jtp.addTab("Calcul", (JPanel) maths);
-        jtp.addTab("QnA", jlbl);
+        jtp.addTab("QnA", (JPanel) qust);
         jtp.addTab("Parametres", (JPanel) settings);
         jtp.addTab("Admin", new AdminPanelGUI());
         jtp.addChangeListener(changeListener);
