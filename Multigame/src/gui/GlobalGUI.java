@@ -18,10 +18,8 @@ public final class GlobalGUI extends JFrame {
 
     JTabbedPane jtp;
     JPanel settings;
-
     JPanel maths;
     JPanel currentActivity;
-
     JPanel Ardoise;
 
 
