@@ -1,0 +1,18 @@
+INSERT INTO `questions` (`id`, `question`, `answer`, `difficulty`) VALUES
+(1, 'Quelle est la couleur du cheval blanc d Henri IV ?','blanc',1),
+(2, 'Quelle est la couleur de l herbe ?','vert',1),
+(3, 'Quelle est la capitale de la France ?','paris',2),
+(4 ,'Comment s appelle le cousin de Dora l Exploratrice ?','diego',1),
+(5, 'Combien de côtés possède un carré ?','4',2),
+(6, 'Quel est l ennemi d Harry Potter ?','voldemort',2),
+(7, 'Quel jour vient avant Jeudi?','mercredi',1),
+(8, 'Combien de lettres l alphabet compte-t-il ?','26',2),
+(9, 'De quel animal provient la laine ?','mouton',1),
+(10, 'Sur quel continent se situe la France ?','europe',2),
+(11, 'Quel insecte produit du miel ?','abeille',2),
+(12, 'Combien un cheval a-t-il de doigts à chaque patte ?','1',2),
+(13, 'Le soleil est une... ?','etoile',2),
+(14, 'Quel animal miaule ?','chat',1),
+(15, 'Aujourd hui, je suis une chenille, demain, je serai un... ?','papillon',1),
+(16, 'A quel mois de l année passe le Père Noël ?','decembre',1),
+(17, 'A quelle saison les arbres perdent-ils leur feuillage ?','automne',2);
