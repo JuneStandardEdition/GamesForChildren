@@ -24,9 +24,9 @@ public class QuestionsDAO implements DAO<Questions> {
     public List<Questions> getAll() {
         String sqlQuery = "SELECT * FROM questions";
         try (Statement stmt = CONNEXION.createStatement()) {
-            ResultSet resSetAvion = stmt.executeQuery(sqlQuery);
-            while (resSetAvion.next()) {
-                qdao.add(new Questions());
+            ResultSet resSetQuestion = stmt.executeQuery(sqlQuery);
+            while (resSetQuestion.next()) {
+                qdao.add(new Questions(resSetQuestion.getInt("id"), resSetQuestion.getString("question"), resSetQuestion.getString("answer"), resSetQuestion.getInt("difficulty")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -43,7 +43,7 @@ public class QuestionsDAO implements DAO<Questions> {
             pstmt.setInt(1, id);
             ResultSet result = pstmt.executeQuery();
             if (result.first()) {
-                qst = new Questions();
+                qst = new Questions(result.getInt("id"), result.getString("question"), result.getString("answer"), result.getInt("difficulty"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionsDAO.class.getName()).log(Level.SEVERE, null, ex);
