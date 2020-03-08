@@ -3,7 +3,7 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.util.Random;
 import javax.swing.BorderFactory;
@@ -27,6 +27,10 @@ public class MathsQuestionsGUI extends JPanel {
 
     // True = Maths Tab, False = QnA Tab
     boolean mathsOrQuestion;
+    int resultat;
+    int nb1;
+    int nb2;
+    String signe;
 
     public MathsQuestionsGUI(String title, boolean whichIsTheTab) {
 
@@ -45,13 +49,20 @@ public class MathsQuestionsGUI extends JPanel {
         // JPanel TextField user answer
         JPanel saisiePane = new JPanel();
         problemLabelPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        
+        
 
         // Génère une String d'un Calcul ou d'une Question
         JLabel labelProblemString = new JLabel();
+        Font font = new Font("Arial",Font.BOLD,80);
+        labelProblemString.setFont(font);
         if (this.mathsOrQuestion) {
-            int nb1 = genererNb1();
-            int nb2 = genererNb2(nb1);
-            labelProblemString.setText(genererCalcul(nb1, nb2));
+            nb1 = genererNb1();
+            nb2 = genererNb2(nb1);
+            signe = genererSigne();
+            labelProblemString.setText(nb1 + signe + nb2 + " = ");
+            resultat = genererCalcul(nb1, signe, nb2);
+            //System.out.println(nb1 + signe + nb2 + " = " + resultat);
         } else {
             labelProblemString.setText(genererQuestion());
         }
@@ -68,25 +79,77 @@ public class MathsQuestionsGUI extends JPanel {
         verif.setPreferredSize(new Dimension(200, 75));
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));
-        questionSuivante.addActionListener((ActionEvent ae) -> {
-            if (this.mathsOrQuestion) {
-                int nb1 = genererNb1();
-                int nb2 = genererNb2(nb1);
-                labelProblemString.setText(genererCalcul(nb1, nb2));
-            } else {
-                labelProblemString.setText(genererQuestion());
-            }
-        });
+
+        //ajouts des boutons
         buttonsPane.add(verif);
         buttonsPane.add(solution);
         buttonsPane.add(questionSuivante);
 
+        
         // Jpanel pour la saisie utilisateur
         saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.CENTER);
-        JTextField saisie_utilisateur = new JTextField(30);
+        Font font2 = new Font("Arial",Font.BOLD,30);
+        reponse.setFont(font2);
+        JTextField saisie_utilisateur = new JTextField(20);
+        saisie_utilisateur.setPreferredSize(new Dimension(200, 70));
+        saisie_utilisateur.setFont(font2);
         saisiePane.add(reponse);
         saisiePane.add(saisie_utilisateur);
+
+        
+        
+        //ecouteur pour le bouton calcul suivant
+        questionSuivante.addActionListener((ActionEvent ae) -> {
+            if (this.mathsOrQuestion) {
+                //on remet la couleur du bouton par defaut
+                verif.setBackground(null);
+
+                //on remet le JTextField vide
+                saisie_utilisateur.setText("");
+
+                //on recreer des un calcul aleatoire
+                nb1 = genererNb1();
+                nb2 = genererNb2(nb1);
+                signe = genererSigne();
+                labelProblemString.setText(nb1 + signe + nb2 + " = ");
+                resultat = genererCalcul(nb1, signe, nb2);
+                //System.out.println(nb1 + signe + nb2 + " = " + resultat);
+            } else {
+                labelProblemString.setText(genererQuestion());
+            }
+        });
+
+        
+        
+        //ecouteur pour le bouton vérification
+        verif.addActionListener((ActionEvent ae) -> {
+            if (this.mathsOrQuestion) {
+                if (Integer.parseInt(saisie_utilisateur.getText()) == resultat) {
+                    verif.setBackground(Color.GREEN);
+                } else {
+                    verif.setBackground(Color.RED);
+                }
+            } else {
+                //TODO
+            }
+
+        });
+
+        
+        
+        //ecouteur pour le bouton solution
+        solution.addActionListener((ActionEvent ae) -> {
+            if (this.mathsOrQuestion) {
+                //on remet la couleur du bouton par defaut
+                verif.setBackground(Color.RED);
+
+                //on remet le JTextField vide
+                saisie_utilisateur.setText("La soluton était : " + resultat);
+            } else {
+                labelProblemString.setText(genererQuestion());
+            }
+        });
 
         add(problemLabelPane);
         add(saisiePane);
@@ -102,12 +165,12 @@ public class MathsQuestionsGUI extends JPanel {
     // Génération du nombre 1 selon la difficulté
     public int genererNb1() {
         int i;
+        Random rd = new Random();
+        //DIFFICULTE_1 = !DIFFICULTE_1;
         if (DIFFICULTE_1) {
-            Random rd = new Random();
-            i = rd.nextInt(9);
-        } else {
-            Random rd = new Random();
-            i = rd.nextInt(999);
+            i = rd.nextInt(10);
+        } else {          
+            i = rd.nextInt(1000);
         }
         return i;
     }
@@ -115,143 +178,70 @@ public class MathsQuestionsGUI extends JPanel {
     // Génération du nombre 2 selon la difficulté
     public int genererNb2(int nb1) {
         int i;
+        Random rd = new Random();
         if (DIFFICULTE_1) {
-            do{
-                Random rd = new Random();
-            i = rd.nextInt(9);
-            }while(i > nb1);
-            
-        } else {
-            Random rd = new Random();
-            i = rd.nextInt(999);
+            do {              
+                i = rd.nextInt(9);
+            } while (i > nb1);
+
+        } else {           
+            i = rd.nextInt(1000);
         }
         return i;
     }
 
-    public int genererCalcull(int nb1, int nb2) {
+    
+    
+    //fonction pour générer le signe du calcul
+    public String genererSigne() {
 
-        int calcul, choixCalcul;
-        int min = 0;
+        String afficherSigne;
+        int choixCalcul;
         int addition = 0;
         int soustraction = 1;
 
+        Random rd = new Random();
+
         if (DIFFICULTE_1) {
 
-            int max = 1;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+            choixCalcul = rd.nextInt(2);
 
             if (choixCalcul == addition) {
-                calcul = nb1 + nb2;
+                afficherSigne = " + ";
             } else {
-                calcul = nb1 - nb2;
+                afficherSigne = " - ";
             }
         } else {
 
-            int max = 2;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
+            choixCalcul = rd.nextInt(3);
 
             if (choixCalcul == addition) {
-                calcul = nb1 + nb2;
+                afficherSigne = " + ";
             } else if (choixCalcul == soustraction) {
-                calcul = nb1 - nb2;
+                afficherSigne = " - ";
             } else {
-                calcul = nb1 * nb2;
+                afficherSigne = " * ";
             }
+        }
+
+        return afficherSigne;
+    }
+    
+    
+    
+     //fonction qui génère le calcul en fonction des 2 nbrs tirés et du signe
+    public int genererCalcul(int nb1, String signe, int nb2) {
+
+        int calcul;
+
+        if (signe.equals(" + ")) {
+            calcul = nb1 + nb2;
+        } else if (signe.equals(" - ")) {
+            calcul = nb1 - nb2;
+        } else {
+            calcul = nb1 * nb2;
         }
 
         return calcul;
     }
-
-    public String genererCalcul(int nb1, int nb2) {
-
-        String afficherCalcul = "";
-        int choixCalcul;
-        int min = 0;
-        int addition = 0;
-        int soustraction = 1;
-        if (DIFFICULTE_1) {
-
-            int max = 1;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-
-            if (choixCalcul == addition) {
-                afficherCalcul = nb1 + " + " + nb2 + " = ";
-            } else {
-                afficherCalcul = nb1 + " - " + nb2 + " = ";
-            }
-        } else {
-
-            int max = 2;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-
-            if (choixCalcul == addition) {
-                afficherCalcul = nb1 + " + " + nb2 + " = ";
-            } else if (choixCalcul == soustraction) {
-                afficherCalcul = nb1 + " - " + nb2 + " = ";
-            } else {
-                afficherCalcul = nb1 + " * " + nb2 + " = ";
-            }
-        }
-
-        return afficherCalcul;
-    }
-
-    
-    /*
-   
-    //Fonction pr la gestion des evenements
-    private void initGUIMath() {
-
-        JPanel afficherCalcul = new JPanel();
-        JPanel boutons = new JPanel();
-        JPanel saisie = new JPanel();
-
-        // Jpanel pour afficher le calcul
-       
-        afficherCalcul.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        String calcul = genererCalcul(genererNb1(), genererNb2());
-
-        JLabel calc = new JLabel(calcul, JLabel.LEFT);
-        afficherCalcul.add(calc);
-       
-        //Jpanel pour la saisie utilisateur
-        
-        saisie.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.LEFT);
-        JTextField saisie_utilisateur = new JTextField(15);
-        saisie.add(reponse);
-        saisie.add(saisie_utilisateur);
-        
-
-        //Jpanel pour afficher les boutons d'options
-        
-        //essaie appels fonction creerBoutons
-        //ButtonsGUI boutons = new ButtonsGUI();
-        //add(boutons.creerBoutons("calcul"));
-        boutons.setLayout(new GridLayout(0, 3));
-        JButton verif = new JButton("Verification");
-        verif.addActionListener((ActionEvent ae) -> {
-
-            if (saisie_utilisateur.getText().equals(genererCalcull(5, 3))) {
-                verif.setBackground(Color.GREEN);
-            } else {
-                verif.setBackground(Color.RED);
-            }
-        });
-
-        JButton solution = new JButton("Solution");
-        JButton questionSuivante = new JButton("Autre calcul");
-
-        boutons.add(verif);
-        boutons.add(solution);
-        boutons.add(questionSuivante);
-
-        add(afficherCalcul);
-        add(boutons);
-        add(saisie);
-    }
-
-    */
-
 }

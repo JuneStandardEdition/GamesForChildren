@@ -24,6 +24,7 @@ public class SQLConnection {
     private static final String url = "jdbc:mysql://" + host + ":" + port + "/" + base;
     private static Connection c = null;
 
+    
     private SQLConnection() {
         // Did you expect a needle?
     }
@@ -39,4 +40,5 @@ public class SQLConnection {
         System.out.println("Connecté à la base de données " + base + " avec l'URL " + url);
         return c;
     }
+     
 }
