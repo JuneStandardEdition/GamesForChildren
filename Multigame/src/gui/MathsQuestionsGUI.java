@@ -26,7 +26,7 @@ import static settings.Settings.DIFFICULTE_1;
 public class MathsQuestionsGUI extends JPanel {
 
     // True = Maths Tab, False = QnA Tab
-    boolean mathsOrQuestion;
+    public static boolean mathsOrQuestion;
     int resultat;
     int nb1;
     int nb2;

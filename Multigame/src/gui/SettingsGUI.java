@@ -2,7 +2,9 @@ package gui;
 
 import java.awt.*;
 import javax.swing.*;
-
+import static gui.MathsQuestionsGUI.mathsOrQuestion;
+import java.awt.event.ActionEvent;
+import static settings.Settings.DIFFICULTE_1;
 /**
  * ************************************************
  * @author June.QL
@@ -37,6 +39,18 @@ public class SettingsGUI extends JPanel {
         ButtonGroup levelSelectionButtonGrp = new ButtonGroup();
         JRadioButton levelSelection1 = new JRadioButton("Niveau 1");
         JRadioButton levelSelection2 = new JRadioButton("Niveau 2");
+        // Ajouts ecouteurs pour les bouttons
+        levelSelection2.addActionListener((ActionEvent ae) -> {
+            if (mathsOrQuestion) {
+               DIFFICULTE_1 = !DIFFICULTE_1; 
+            }
+        });
+        levelSelection1.addActionListener((ActionEvent ae) -> {
+            if (mathsOrQuestion) {
+               DIFFICULTE_1 = true; 
+            }
+        });
+        
         // Adds JRadioButton to ButtonGroup (manages buttons comportement)
         levelSelectionButtonGrp.add(levelSelection1);
         levelSelectionButtonGrp.add(levelSelection2);

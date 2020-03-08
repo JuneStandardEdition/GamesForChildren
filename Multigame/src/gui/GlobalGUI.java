@@ -1,7 +1,6 @@
 package gui;
 
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -29,8 +28,6 @@ public final class GlobalGUI extends JFrame {
     public GlobalGUI() {
 
         JFrame f = new JFrame("Multi Game");
-        ImageIcon icone = new ImageIcon("/home/stag/Documents/JAVA_JSE/GamesForChildren/Multigame");
-        f.setIconImage(icone.getImage());
         f.setSize(800, 600);
         f.setResizable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -83,4 +80,5 @@ public final class GlobalGUI extends JFrame {
         f.setJMenuBar(menu);
         f.setVisible(true);
     }
+
 }
