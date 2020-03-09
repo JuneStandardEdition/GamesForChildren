@@ -105,4 +105,10 @@ public class Calcul extends MathsQuestionsGUI {
         return calcul;
     }
 
+    @Override
+    public String genererQuestion() {
+
+        return "aaa";
+    }
+
 }

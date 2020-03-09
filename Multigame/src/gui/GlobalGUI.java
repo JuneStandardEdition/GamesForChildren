@@ -2,13 +2,14 @@ package gui;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import questions.Calcul;
+import questions.Question;
 
 /**
  *
@@ -45,8 +46,8 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
-        maths = new MathsQuestionsGUI("Maths");
-        qust = new MathsQuestionsGUI("QnA");
+        maths = new Calcul("Maths");
+        qust = new Question("QnA");
         ardoise = new ArdoiseGUI();
 
         jtp = new JTabbedPane();
