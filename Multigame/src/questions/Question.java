@@ -96,8 +96,10 @@ public class Question extends MathsQuestionsGUI {
 
     @Override
     public String genererQuestion() {
-        qdao = new QuestionsDAO();
-        //return qdao.getAll().find(new Random(17).nextInt()).getQuestion();
+        /*
+        QuestionsDAO qdao = new QuestionsDAO();
+        return qdao.find(new Random().nextInt(17)).getQuestion();
+         */
         return "a";
     }
 }

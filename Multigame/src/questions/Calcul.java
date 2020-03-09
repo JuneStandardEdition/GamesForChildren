@@ -2,7 +2,6 @@ package questions;
 
 import gui.MathsQuestionsGUI;
 import java.util.Random;
-import javax.swing.JLabel;
 import static settings.Settings.DIFFICULTE_1;
 
 /**
@@ -15,13 +14,21 @@ import static settings.Settings.DIFFICULTE_1;
  */
 public class Calcul extends MathsQuestionsGUI {
 
-    int nb1;
-    int nb2;
-    int result;
+    Integer nb1;
+    Integer nb2;
+    Integer result;
     String signe;
 
     public Calcul(String title) {
         super(title);
+    }
+    
+    public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe){
+        super("Calcul");
+        this.nb1 = nb1;
+        this.nb2 = nb2;
+        this.result = resultat;
+        this.signe = signe;
     }
 
     // Génération du nombre 1 selon la difficulté
@@ -114,5 +121,39 @@ public class Calcul extends MathsQuestionsGUI {
         
         return nb1 + signe + nb2 + " = ";
     }
+
+    public int getNb1() {
+        return nb1;
+    }
+
+    public void setNb1(int nb1) {
+        this.nb1 = nb1;
+    }
+
+    public int getNb2() {
+        return nb2;
+    }
+
+    public void setNb2(int nb2) {
+        this.nb2 = nb2;
+    }
+
+    public int getResult() {
+        return result;
+    }
+
+    public void setResult(int result) {
+        this.result = result;
+    }
+
+    public String getSigne() {
+        return signe;
+    }
+
+    public void setSigne(String signe) {
+        this.signe = signe;
+    }
+    
+    
 
 }
