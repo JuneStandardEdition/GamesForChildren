@@ -1,6 +1,7 @@
 package gui;
 
 import questions.Calcul;
+import questions.Question;
 
 /**
  * ************************************************
@@ -12,26 +13,26 @@ import questions.Calcul;
  */
 public class CalculGUI extends MathsQuestionsGUI {
 
-    Calcul c;
+    Calcul c = new Calcul();
+    Question q = new Question();
 
     public CalculGUI(String title) {
         super(title);
-        c = new Calcul();
+        c.genererNb1();
+        c.genererNb2();
+        c.genererSigne();
+        c.genererResult();
+        q.setQuestion(Integer.toString(c.nb1));
     }
 
     @Override
-    public Calcul genererQuestion() {
-        c.setNb1(c.genererNb1());
-        c.setNb2(c.genererNb2());
-        c.setSigne(c.genererSigne());
-        c.setResult(c.genererResult());
-        return c;
+    public Question genererQuestion() {
+        return q;
     }
 
     @Override
     public String genererIntitule() {
-        String s = c.getNb1() + c.getSigne() + c.getNb2() + " = ";
-        System.out.println(s);
+        String s = q.getQuestion();
         return s;
     }
 

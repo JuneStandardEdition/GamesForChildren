@@ -10,10 +10,10 @@ package questions;
  */
 public class Question {
 
-    Integer id;
-    String question;
-    String answer;
-    Integer difficulty;
+    Integer id = 0;
+    String question = "N/A ?";
+    String answer = "N/A";
+    Integer difficulty = 0;
 
     public Question() {
     }

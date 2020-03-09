@@ -13,16 +13,12 @@ import static settings.Settings.DIFFICULTE_1;
  */
 public class Calcul {
 
-    Integer nb1;
-    Integer nb2;
-    Integer result;
-    String signe;
+    public Integer nb1 = 0;
+    public Integer nb2 = 0;
+    public Integer result = 0;
+    public String signe = "";
 
     public Calcul() {
-        nb1 = 0;
-        nb2 = 0;
-        result = 0;
-        signe = " + ";
     }
 
     public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe) {
@@ -36,11 +32,11 @@ public class Calcul {
     public int genererNb1() {
         int i;
         Random rd = new Random();
-        if (DIFFICULTE_1) {
+        /*if (DIFFICULTE_1) {
             i = rd.nextInt(10);
-        } else {
-            i = rd.nextInt(1000);
-        }
+        } else {*/
+        i = rd.nextInt(1000);
+        //}
         return i;
     }
 
@@ -140,6 +136,11 @@ public class Calcul {
 
     public void setSigne(String signe) {
         this.signe = signe;
+    }
+
+    @Override
+    public String toString() {
+        return nb1 + signe + nb2 + " = " + result;
     }
 
 }

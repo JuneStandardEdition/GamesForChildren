@@ -12,6 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import questions.Question;
 
 /**
  * ************************************************
@@ -70,7 +71,8 @@ public abstract class MathsQuestionsGUI extends JPanel {
         checker.setPreferredSize(new Dimension(200, 75));
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));
-        //labelQuestion.setText(genererIntitule());
+        genererQuestion();
+        labelQuestion.setText(genererIntitule());
 
         // Ajout des boutons
         /**
@@ -140,7 +142,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         saisie_utilisateur.requestFocusInWindow();
     }
 
-    public abstract Object genererQuestion();
+    public abstract Question genererQuestion();
 
     public abstract String genererIntitule();
 
