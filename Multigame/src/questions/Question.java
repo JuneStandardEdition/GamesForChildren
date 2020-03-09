@@ -94,11 +94,14 @@ public class Question extends MathsQuestionsGUI {
     }
 
     @Override
-    public String genererQuestion() {
-        /*
+    public Question genererQuestion() {
         QuestionsDAO qdao = new QuestionsDAO();
-        return qdao.find(new Random().nextInt(17)).getQuestion();
-         */
-        return "a";
+        return qdao.find(new Random().nextInt(30));
+    }
+
+    @Override
+    public String genererIntitule() {
+        genererQuestion();
+        return question;
     }
 }

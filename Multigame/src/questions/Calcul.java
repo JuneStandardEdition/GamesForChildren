@@ -22,8 +22,8 @@ public class Calcul extends MathsQuestionsGUI {
     public Calcul(String title) {
         super(title);
     }
-    
-    public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe){
+
+    public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe) {
         super("Calcul");
         this.nb1 = nb1;
         this.nb2 = nb2;
@@ -93,33 +93,36 @@ public class Calcul extends MathsQuestionsGUI {
         return afficherSigne;
     }
 
-    //fonction qui génère le calcul en fonction des 2 nbrs tirés et du signe
-    public int genererCalcul() {
-
-        int calcul;
-
+    // Fonction qui calcule le résultat en fonction des 2 nbrs tirés et du signe
+    public Integer genererResult() {
         switch (signe) {
             case " + ":
-                calcul = nb1 + nb2;
+                result = nb1 + nb2;
                 break;
             case " - ":
-                calcul = nb1 - nb2;
+                result = nb1 - nb2;
                 break;
             default:
-                calcul = nb1 * nb2;
+                result = nb1 * nb2;
                 break;
         }
-
-        return calcul;
+        return result;
     }
 
     @Override
-    public String genererQuestion() {
-        nb1 = genererNb1();
-        nb2 = genererNb2();
-        signe = genererSigne();
-        
-        return nb1 + signe + nb2 + " = ";
+    public Calcul genererQuestion() {
+        setNb1(genererNb1());
+        setNb2(genererNb2());
+        setSigne(genererSigne());
+        setResult(genererResult());
+        return this;
+    }
+
+    @Override
+    public String genererIntitule() {
+        genererQuestion();
+        String intitule = nb1 + " " + signe + " " + nb2 + " = ";
+        return intitule;
     }
 
     public int getNb1() {
@@ -153,7 +156,5 @@ public class Calcul extends MathsQuestionsGUI {
     public void setSigne(String signe) {
         this.signe = signe;
     }
-    
-    
 
 }
