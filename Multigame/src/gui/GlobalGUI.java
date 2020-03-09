@@ -46,7 +46,7 @@ public final class GlobalGUI extends JFrame {
 
         settings = new SettingsGUI();
         maths = new MathsQuestionsGUI("Maths", true);
-        //qust = new MathsQuestionsGUI("QnA", false);
+        qust = new MathsQuestionsGUI("QnA", false);
         ardoise = new ArdoiseGUI();
 
         // Temporaire : Affiche un message dans QnA
