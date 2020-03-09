@@ -23,8 +23,6 @@ import questions.Calcul;
  *************************************************
  */
 public abstract class MathsQuestionsGUI extends JPanel {
-    
-    
 
     // JPanel pour afficher le problème (question ou calcul)
     JPanel questionPane;
@@ -55,7 +53,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         checker = new JButton("Vérification");
         solution = new JButton("Solution");
         questionSuivante = new JButton("Suivant");
-        
+
         initGUI();
     }
 
@@ -65,8 +63,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
         Font font = new Font("Arial", Font.BOLD, 50);
         labelQuestion.setFont(font);
-        
-        
+
         labelQuestion.setText(genererQuestion());
         /*nb1 = genererNb1();
         nb2 = genererNb2(nb1);
@@ -75,7 +72,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         resultat = genererCalcul(nb1, signe, nb2);
         System.out.println(nb1 + signe + nb2 + " = " + resultat);
         return labelQuestion.setText(genererQuestion());*/
-        
+
         questionPane.add(labelQuestion);
 
         // JPanel pour afficher les boutons d'options
@@ -111,7 +108,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             //on remet le JTextField vide
             saisie_utilisateur.setText("");
             saisie_utilisateur.requestFocusInWindow();
-            
+
             labelQuestion.setText(genererQuestion());
 
             //on recreer des un calcul aleatoire
@@ -121,7 +118,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             // labelProblemString.setText(nb1 + signe + nb2 + " = ");
             // resultat = genererCalcul(nb1, signe, nb2);
             //System.out.println(nb1 + signe + nb2 + " = " + resultat);
-            //labelQuestion.setText("a"/*genererQuestion()*/);
+            labelQuestion.setText(genererQuestion());
 
         });
 
@@ -148,8 +145,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
         //test evenement entré pour valider
         //TODO
-        
-        
         //ecouteur pour le bouton solution
         solution.addActionListener((ActionEvent ae) -> {
             if (true) {
