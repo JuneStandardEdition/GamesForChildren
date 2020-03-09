@@ -6,7 +6,7 @@ import java.util.Random;
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.3
+ * @version 0.1.4
  * @date 05-03-2020.09:38
  *
  *************************************************
@@ -17,7 +17,6 @@ public class Question extends MathsQuestionsGUI {
     String question;
     String answer;
     Integer difficulty;
-    QuestionsDAO qdao;
 
     public Question(String title) {
         super(title);

@@ -113,7 +113,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             // labelProblemString.setText(nb1 + signe + nb2 + " = ");
             // resultat = genererCalcul(nb1, signe, nb2);
             //System.out.println(nb1 + signe + nb2 + " = " + resultat);
-            labelQuestion.setText("a"/*genererQuestion()*/);
+            labelQuestion.setText(genererQuestion());
 
         });
 
