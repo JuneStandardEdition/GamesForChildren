@@ -16,19 +16,20 @@ public class Calcul extends MathsQuestionsGUI {
 
     Integer nb1;
     Integer nb2;
-    Integer result;
+    //Integer result;
     String signe;
 
     public Calcul(String title) {
         super(title);
+        this.result = genererResult();
     }
 
-    public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe) {
+    public Calcul(Integer nb1, Integer nb2, String signe) {
         super("Calcul");
         this.nb1 = nb1;
         this.nb2 = nb2;
-        this.result = resultat;
         this.signe = signe;
+        this.result = genererResult();
     }
 
     // Génération du nombre 1 selon la difficulté

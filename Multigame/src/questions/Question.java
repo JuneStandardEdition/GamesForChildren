@@ -94,6 +94,7 @@ public class Question extends MathsQuestionsGUI {
     }
 
 
+    @Override
     public Question genererQuestion() {
         QuestionsDAO qdao = new QuestionsDAO();
         return qdao.find(new Random().nextInt(30));
@@ -102,7 +103,6 @@ public class Question extends MathsQuestionsGUI {
     @Override
     public String genererIntitule() {
         genererQuestion();
-        return question;
-
+        return this.question;
     }
 }

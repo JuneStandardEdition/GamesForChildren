@@ -40,12 +40,15 @@ public abstract class MathsQuestionsGUI extends JPanel {
     JButton questionSuivante;
     // Générique pour question ou calcul
     Object o;
+    //variable pour le resultat du calcul
+    public Integer result;
 
     public MathsQuestionsGUI(String title) {
         super();
         setBorder(BorderFactory.createTitledBorder(title));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
+        
         questionPane = new JPanel();
         saisiePane = new JPanel();
         buttonsPane = new JPanel();
@@ -65,6 +68,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         questionPane.setLayout(new FlowLayout(FlowLayout.CENTER));
         Font font = new Font("Arial", Font.BOLD, 50);
         labelQuestion.setFont(font);
+        labelQuestion.setText(genererIntitule());
 
         questionPane.add(labelQuestion);
         // JPanel pour afficher les boutons d'options
@@ -82,6 +86,8 @@ public abstract class MathsQuestionsGUI extends JPanel {
         buttonsPane.add(solution);
         buttonsPane.add(questionSuivante);
         
+        
+      
         // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
             //on remet la couleur du bouton par defaut
@@ -91,24 +97,18 @@ public abstract class MathsQuestionsGUI extends JPanel {
             saisie_utilisateur.setText("");
             saisie_utilisateur.requestFocusInWindow();
 
-          //on recreer des un calcul aleatoire
-            // nb1 = genererNb1();
-            // nb2 = genererNb2(nb1);
-            // signe = genererSigne();
-            // labelProblemString.setText(nb1 + signe + nb2 + " = ");
-            // resultat = genererCalcul(nb1, signe, nb2);
-            //System.out.println(nb1 + signe + nb2 + " = " + resultat);
             labelQuestion.setText(genererIntitule());
 
         });
 
         //ecouteur pour le bouton vérification
         checker.addActionListener((ActionEvent ae) -> {
+            
             if (true) {
                 if (saisie_utilisateur.getText().equals("")) {
                     JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
                             "ERREUR !", JOptionPane.PLAIN_MESSAGE);
-                } else if (Integer.parseInt(saisie_utilisateur.getText()) == 0 /*resultat*/) {
+                } else if (Integer.parseInt(saisie_utilisateur.getText()) == result) {
                     checker.setBackground(Color.GREEN);
                 } /*
                 else if(!Integer.parseInt(saisie_utilisateur.getText()) = resultat){
@@ -127,8 +127,12 @@ public abstract class MathsQuestionsGUI extends JPanel {
          * Bouton SOLUTION
          */
         buttonsPane.add(solution);
+        
+        
         //test evenement entré pour valider
         //TODO
+        
+        
         //ecouteur pour le bouton solution
         solution.addActionListener((ActionEvent ae) -> {
             if (true) {
@@ -136,7 +140,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
                 checker.setBackground(Color.RED);
 
                 // on remet le JTextField vide
-                saisie_utilisateur.setText("La solution était : " /*+ resultat*/);
+                saisie_utilisateur.setText("La solution était : " + result);
             } else {
                 //TODO
             }
@@ -146,6 +150,8 @@ public abstract class MathsQuestionsGUI extends JPanel {
          * Bouton SUIVANT
          */
         buttonsPane.add(questionSuivante);
+        
+        
         // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
             //on remet la couleur du bouton par defaut
@@ -172,7 +178,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
         add(questionPane);
         add(saisiePane);
-        
         add(buttonsPane);
 
         saisie_utilisateur.requestFocusInWindow();

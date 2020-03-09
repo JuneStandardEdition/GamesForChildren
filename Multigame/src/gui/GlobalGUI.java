@@ -1,9 +1,15 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
@@ -65,7 +71,14 @@ public final class GlobalGUI extends JFrame {
         JMenu questions = new JMenu("Questions");
         JMenu settingsMenu = new JMenu("Paramètres");
         JMenu admin = new JMenu("Administration");
-        //JMenu subJMenu
+        JMenuItem co = new JMenuItem("Se connecter");
+        admin.add(new JMenuItem("Se connecter"));
+
+        co.addActionListener((ae) -> {
+            if (ae.getSource() == co) {
+                System.out.println("PUTAIN");
+            }
+        });
 
         // Adds Menus
         menu.add(dessin);
@@ -73,7 +86,6 @@ public final class GlobalGUI extends JFrame {
         menu.add(questions);
         menu.add(settingsMenu);
         menu.add(admin);
-        
 
         // Adds content to JFrame and sets it visible
         f.add(jtp);
