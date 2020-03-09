@@ -31,7 +31,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
     // ButtonsGUI boutons = new ButtonsGUI();
     JPanel buttonsPane;
     // Génère une String d'un Calcul ou d'une Question
-    JLabel labelQuestion;
+    protected JLabel labelQuestion;
     // JTF user entry
     JTextField saisie_utilisateur = new JTextField(30);
     // JButtons
@@ -62,6 +62,8 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
         Font font = new Font("Arial", Font.BOLD, 50);
         labelQuestion.setFont(font);
+        
+        labelQuestion.setText(genererQuestion());
 
         /*nb1 = genererNb1();
         nb2 = genererNb2(nb1);
@@ -70,6 +72,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         resultat = genererCalcul(nb1, signe, nb2);
         System.out.println(nb1 + signe + nb2 + " = " + resultat);
         return labelQuestion.setText(genererQuestion());*/
+        
         questionPane.add(labelQuestion);
 
         // JPanel pour afficher les boutons d'options
@@ -139,6 +142,9 @@ public abstract class MathsQuestionsGUI extends JPanel {
         });
 
         //test evenement entré pour valider
+        //TODO
+        
+        
         //ecouteur pour le bouton solution
         solution.addActionListener((ActionEvent ae) -> {
             if (true) {

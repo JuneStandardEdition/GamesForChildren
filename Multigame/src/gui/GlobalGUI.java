@@ -73,6 +73,7 @@ public final class GlobalGUI extends JFrame {
         menu.add(questions);
         menu.add(settingsMenu);
         menu.add(admin);
+        
 
         // Adds content to JFrame and sets it visible
         f.add(jtp);

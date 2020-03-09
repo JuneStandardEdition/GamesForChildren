@@ -2,6 +2,7 @@ package questions;
 
 import gui.MathsQuestionsGUI;
 import java.util.Random;
+import javax.swing.JLabel;
 import static settings.Settings.DIFFICULTE_1;
 
 /**
@@ -107,8 +108,11 @@ public class Calcul extends MathsQuestionsGUI {
 
     @Override
     public String genererQuestion() {
-
-        return "aaa";
+        nb1 = genererNb1();
+        nb2 = genererNb2();
+        signe = genererSigne();
+        
+        return nb1 + signe + nb2 + " = ";
     }
 
 }
