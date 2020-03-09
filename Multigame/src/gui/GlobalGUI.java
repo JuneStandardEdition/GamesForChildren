@@ -45,12 +45,9 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
-        maths = new MathsQuestionsGUI("Maths", true);
-        qust = new MathsQuestionsGUI("QnA", false);
+        maths = new MathsQuestionsGUI("Maths");
+        qust = new MathsQuestionsGUI("QnA");
         ardoise = new ArdoiseGUI();
-
-        // Temporaire : Affiche un message dans QnA
-        JLabel jlbl = new JLabel("LEEROY");
 
         jtp = new JTabbedPane();
         jtp.addTab("Ardoise", (JPanel) ardoise);
