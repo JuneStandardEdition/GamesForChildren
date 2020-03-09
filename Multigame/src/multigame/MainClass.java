@@ -6,7 +6,7 @@ import gui.GlobalGUI;
  *
  * @author Le meilleur des groupes
  * @desc Application avec interface graphique, regroupant des jeux pour enfant.
- * @version 0.2.8.2: CONCEPTION XD
+ * @version 0.2.8.3: CONCEPTION XD
  */
 public class MainClass {
 

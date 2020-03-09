@@ -22,20 +22,22 @@ import questions.*;
  *
  *************************************************
  */
-public class MathsQuestionsGUI extends JPanel {
+public abstract class MathsQuestionsGUI extends JPanel {
 
     // JPanel pour afficher le problème (question ou calcul)
-    JPanel questionPane = new JPanel();
+    JPanel questionPane;
     // JPanel TextField user answer
-    JPanel saisiePane = new JPanel();
+    JPanel saisiePane;
     // ButtonsGUI boutons = new ButtonsGUI();
-    JPanel buttonsPane = new JPanel();
+    JPanel buttonsPane;
     // Génère une String d'un Calcul ou d'une Question
-    JLabel labelQuestion = new JLabel();
+    JLabel labelQuestion;
+    // JTF user entry
+    JTextField saisie_utilisateur = new JTextField(30);
     // JButtons
-    JButton checker = new JButton("Vérification");
-    JButton solution = new JButton("Solution");
-    JButton questionSuivante = new JButton("Suivant");
+    JButton checker;
+    JButton solution;
+    JButton questionSuivante;
     // Générique pour question ou calcul
     Object o;
 
@@ -43,6 +45,14 @@ public class MathsQuestionsGUI extends JPanel {
         super();
         setBorder(BorderFactory.createTitledBorder(title));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        questionPane = new JPanel();
+        saisiePane = new JPanel();
+        buttonsPane = new JPanel();
+        labelQuestion = new JLabel();
+        checker = new JButton("Vérification");
+        solution = new JButton("Solution");
+        questionSuivante = new JButton("Suivant");
         initGUI();
     }
 
@@ -53,14 +63,13 @@ public class MathsQuestionsGUI extends JPanel {
         Font font = new Font("Arial", Font.BOLD, 50);
         labelQuestion.setFont(font);
 
-        // nb1 = genererNb1();
-        // nb2 = genererNb2(nb1);
-        // signe = genererSigne();
-        // labelProblemString.setText(nb1 + signe + nb2 + " = ");
-        // resultat = genererCalcul(nb1, signe, nb2);
-        //System.out.println(nb1 + signe + nb2 + " = " + resultat);
-        labelQuestion.setText("aa"/*genererQuestion()*/);
-
+        /*nb1 = genererNb1();
+        nb2 = genererNb2(nb1);
+        signe = genererSigne();
+        labelProblemString.setText(nb1 + signe + nb2 + " = ");
+        resultat = genererCalcul(nb1, signe, nb2);
+        System.out.println(nb1 + signe + nb2 + " = " + resultat);
+        return labelQuestion.setText(genererQuestion());*/
         questionPane.add(labelQuestion);
 
         // JPanel pour afficher les boutons d'options
@@ -80,7 +89,6 @@ public class MathsQuestionsGUI extends JPanel {
         JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.CENTER);
         Font font2 = new Font("Arial", Font.BOLD, 25);
         reponse.setFont(font2);
-        JTextField saisie_utilisateur = new JTextField(20);
 
         saisie_utilisateur.setPreferredSize(new Dimension(200, 70));
         saisie_utilisateur.setFont(font2);
@@ -151,4 +159,6 @@ public class MathsQuestionsGUI extends JPanel {
 
         saisie_utilisateur.requestFocusInWindow();
     }
+
+    public abstract String genererQuestion();
 }

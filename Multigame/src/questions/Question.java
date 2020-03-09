@@ -94,9 +94,9 @@ public class Question extends MathsQuestionsGUI {
                 .equals(answer);
     }
 
+    @Override
     public String genererQuestion() {
         QuestionsDAO qdao = new QuestionsDAO();
         return qdao.find(new Random().nextInt(17)).getQuestion();
     }
-
 }
