@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import questions.Calcul;
+import questions.*;
 
 /**
  * ************************************************
@@ -57,24 +57,16 @@ public abstract class MathsQuestionsGUI extends JPanel {
         initGUI();
     }
 
+    /**
+     * Inits base GUI for Calcul and Question
+     */
     private void initGUI() {
 
         questionPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-
         Font font = new Font("Arial", Font.BOLD, 50);
         labelQuestion.setFont(font);
 
-        labelQuestion.setText(genererQuestion());
-        /*nb1 = genererNb1();
-        nb2 = genererNb2(nb1);
-        signe = genererSigne();
-        labelProblemString.setText(nb1 + signe + nb2 + " = ");
-        resultat = genererCalcul(nb1, signe, nb2);
-        System.out.println(nb1 + signe + nb2 + " = " + resultat);
-        return labelQuestion.setText(genererQuestion());*/
-
         questionPane.add(labelQuestion);
-
         // JPanel pour afficher les boutons d'options
         // Appel fonction creerBoutons
         buttonsPane.setLayout(new FlowLayout(FlowLayout.CENTER));
@@ -82,24 +74,14 @@ public abstract class MathsQuestionsGUI extends JPanel {
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));
 
-        //ajouts des boutons
+        // Ajout des boutons
+        /**
+         * Bouton VERIFICATION
+         */
         buttonsPane.add(checker);
         buttonsPane.add(solution);
         buttonsPane.add(questionSuivante);
-
-        // Jpanel pour la saisie utilisateur
-        saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.CENTER);
-        Font font2 = new Font("Arial", Font.BOLD, 25);
-        reponse.setFont(font2);
-
-        saisie_utilisateur.setPreferredSize(new Dimension(200, 70));
-        saisie_utilisateur.setFont(font2);
-
-        saisiePane.add(reponse);
-        saisiePane.add(saisie_utilisateur);
-        saisie_utilisateur.requestFocusInWindow();
-
+        
         // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
             //on remet la couleur du bouton par defaut
@@ -116,7 +98,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             // labelProblemString.setText(nb1 + signe + nb2 + " = ");
             // resultat = genererCalcul(nb1, signe, nb2);
             //System.out.println(nb1 + signe + nb2 + " = " + resultat);
-            labelQuestion.setText(genererQuestion());
+            labelQuestion.setText(genererIntitule());
 
         });
 
@@ -124,7 +106,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         checker.addActionListener((ActionEvent ae) -> {
             if (true) {
                 if (saisie_utilisateur.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Vous n'avez saisis aucun resultat",
+                    JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
                             "ERREUR !", JOptionPane.PLAIN_MESSAGE);
                 } else if (Integer.parseInt(saisie_utilisateur.getText()) == 0 /*resultat*/) {
                     checker.setBackground(Color.GREEN);
@@ -141,6 +123,10 @@ public abstract class MathsQuestionsGUI extends JPanel {
             }
         });
 
+        /**
+         * Bouton SOLUTION
+         */
+        buttonsPane.add(solution);
         //test evenement entré pour valider
         //TODO
         //ecouteur pour le bouton solution
@@ -154,15 +140,45 @@ public abstract class MathsQuestionsGUI extends JPanel {
             } else {
                 //TODO
             }
-        }
-        );
+        });
+
+        /**
+         * Bouton SUIVANT
+         */
+        buttonsPane.add(questionSuivante);
+        // Ecouteur pour le bouton "Suivant"
+        questionSuivante.addActionListener((ActionEvent ae) -> {
+            //on remet la couleur du bouton par defaut
+            checker.setBackground(null);
+
+            //on remet le JTextField vide
+            saisie_utilisateur.setText("");
+            saisie_utilisateur.requestFocusInWindow();
+            labelQuestion.setText(genererIntitule());
+        });
+
+        // Jpanel pour la saisie utilisateur
+        saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.CENTER);
+        Font font2 = new Font("Arial", Font.BOLD, 25);
+        reponse.setFont(font2);
+
+        saisie_utilisateur.setPreferredSize(new Dimension(200, 70));
+        saisie_utilisateur.setFont(font2);
+
+        saisiePane.add(reponse);
+        saisiePane.add(saisie_utilisateur);
+        saisie_utilisateur.requestFocusInWindow();
 
         add(questionPane);
         add(saisiePane);
+        
         add(buttonsPane);
 
         saisie_utilisateur.requestFocusInWindow();
     }
 
-    public abstract String genererQuestion();
+    public abstract Object genererQuestion();
+
+    public abstract String genererIntitule();
 }
