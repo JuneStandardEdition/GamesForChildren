@@ -28,19 +28,21 @@ public class MathsQuestionsGUI extends JPanel {
     JPanel questionPane = new JPanel();
     // JPanel TextField user answer
     JPanel saisiePane = new JPanel();
+    // ButtonsGUI boutons = new ButtonsGUI();
+    JPanel buttonsPane = new JPanel();
     // Génère une String d'un Calcul ou d'une Question
     JLabel labelQuestion = new JLabel();
-    // JButton Verification
-    JButton checker;
+    // JButtons
+    JButton checker = new JButton("Vérification");
+    JButton solution = new JButton("Solution");
+    JButton questionSuivante = new JButton("Suivant");
     // Générique pour question ou calcul
     Object o;
 
     public MathsQuestionsGUI(String title) {
-
         super();
         setBorder(BorderFactory.createTitledBorder(title));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-
         initGUI();
     }
 
@@ -63,12 +65,7 @@ public class MathsQuestionsGUI extends JPanel {
 
         // JPanel pour afficher les boutons d'options
         // Appel fonction creerBoutons
-        // ButtonsGUI boutons = new ButtonsGUI();
-        JPanel buttonsPane = new JPanel();
         buttonsPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        checker = new JButton("Verification");
-        JButton solution = new JButton("Solution");
-        JButton questionSuivante = new JButton("Suivant");
         checker.setPreferredSize(new Dimension(200, 75));
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));

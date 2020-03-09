@@ -17,6 +17,7 @@ public class Question extends MathsQuestionsGUI {
     String question;
     String answer;
     Integer difficulty;
+    QuestionsDAO qdao;
 
     public Question(String title) {
         super(title);
