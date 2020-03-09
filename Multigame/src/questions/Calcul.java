@@ -1,30 +1,31 @@
 package questions;
 
-import gui.MathsQuestionsGUI;
 import java.util.Random;
 import static settings.Settings.DIFFICULTE_1;
 
 /**
  * ************************************************
- * @author June.QL
- * @version 0.1.1
+ * @author will.i.am
+ * @version 0.1.2
  * @date 09-03-2020.9:33
  *
  *************************************************
  */
-public class Calcul extends MathsQuestionsGUI {
+public class Calcul {
 
     Integer nb1;
     Integer nb2;
     Integer result;
     String signe;
 
-    public Calcul(String title) {
-        super(title);
+    public Calcul() {
+        nb1 = 0;
+        nb2 = 0;
+        result = 0;
+        signe = " + ";
     }
 
     public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe) {
-        super("Calcul");
         this.nb1 = nb1;
         this.nb2 = nb2;
         this.result = resultat;
@@ -107,27 +108,6 @@ public class Calcul extends MathsQuestionsGUI {
                 break;
         }
         return result;
-    }
-
-    @Override
-    public Calcul genererQuestion() {
-        setNb1(genererNb1());
-        setNb2(genererNb2());
-        setSigne(genererSigne());
-        setResult(genererResult());
-        return this;
-    }
-
-    @Override
-    public String genererIntitule() {
-        this.genererQuestion();
-        String intitule = nb1 + " " + signe + " " + nb2 + " = ";
-        return intitule;
-    }
-
-    @Override
-    public String getCurrentAnswer() {
-        return result.toString();
     }
 
     public int getNb1() {

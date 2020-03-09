@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import questions.*;
 
 /**
  * ************************************************
@@ -38,8 +37,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
     JButton checker;
     JButton solution;
     JButton questionSuivante;
-    // Générique pour question ou calcul
-    Object o;
 
     public MathsQuestionsGUI(String title) {
         super();
@@ -73,7 +70,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         checker.setPreferredSize(new Dimension(200, 75));
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));
-        labelQuestion.setText(genererIntitule());
+        //labelQuestion.setText(genererIntitule());
 
         // Ajout des boutons
         /**
