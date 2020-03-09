@@ -22,8 +22,8 @@ public class Calcul extends MathsQuestionsGUI {
     public Calcul(String title) {
         super(title);
     }
-    
-    public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe){
+
+    public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe) {
         super("Calcul");
         this.nb1 = nb1;
         this.nb2 = nb2;
@@ -118,7 +118,8 @@ public class Calcul extends MathsQuestionsGUI {
         nb1 = genererNb1();
         nb2 = genererNb2();
         signe = genererSigne();
-        
+        result = genererCalcul();      
+
         return nb1 + signe + nb2 + " = ";
     }
 
@@ -153,7 +154,4 @@ public class Calcul extends MathsQuestionsGUI {
     public void setSigne(String signe) {
         this.signe = signe;
     }
-    
-    
-
 }

@@ -109,9 +109,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             saisie_utilisateur.setText("");
             saisie_utilisateur.requestFocusInWindow();
 
-            labelQuestion.setText(genererQuestion());
-
-            //on recreer des un calcul aleatoire
+          //on recreer des un calcul aleatoire
             // nb1 = genererNb1();
             // nb2 = genererNb2(nb1);
             // signe = genererSigne();
