@@ -67,6 +67,7 @@ public final class GlobalGUI extends JFrame {
         JMenu questions = new JMenu("Questions");
         JMenu settingsMenu = new JMenu("Paramètres");
         JMenu admin = new JMenu("Administration");
+        //JMenu subJMenu
 
         // Adds Menus
         menu.add(dessin);
