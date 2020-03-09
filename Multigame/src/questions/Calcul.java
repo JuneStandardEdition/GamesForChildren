@@ -120,9 +120,14 @@ public class Calcul extends MathsQuestionsGUI {
 
     @Override
     public String genererIntitule() {
-        genererQuestion();
+        this.genererQuestion();
         String intitule = nb1 + " " + signe + " " + nb2 + " = ";
         return intitule;
+    }
+
+    @Override
+    public String getCurrentAnswer() {
+        return result.toString();
     }
 
     public int getNb1() {

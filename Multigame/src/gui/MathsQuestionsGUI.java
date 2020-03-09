@@ -73,6 +73,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
         checker.setPreferredSize(new Dimension(200, 75));
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));
+        labelQuestion.setText(genererIntitule());
 
         // Ajout des boutons
         /**
@@ -81,22 +82,14 @@ public abstract class MathsQuestionsGUI extends JPanel {
         buttonsPane.add(checker);
         //ecouteur pour le bouton vérification
         checker.addActionListener((ActionEvent ae) -> {
-            if (true) {
-                if (saisie_utilisateur.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
-                            "ERREUR !", JOptionPane.PLAIN_MESSAGE);
-                } else if (Integer.parseInt(saisie_utilisateur.getText()) == 0 /*resultat*/) {
-                    checker.setBackground(Color.GREEN);
-                } /*
-                else if(!Integer.parseInt(saisie_utilisateur.getText()) = resultat){
-                    JOptionPane.showMessageDialog (null, "Erreur de saisie !!!",
-               "ERREUR !", JOptionPane.PLAIN_MESSAGE);
-                 */ else {
-                    checker.setBackground(Color.RED);
-                    saisie_utilisateur.setText("");
-                }
+            if (saisie_utilisateur.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
+                        "ERREUR !", JOptionPane.PLAIN_MESSAGE);
+            } else if (saisie_utilisateur.getText().equals(getCurrentAnswer())) {
+                checker.setBackground(Color.GREEN);
             } else {
-                //TODO
+                checker.setBackground(Color.RED);
+                saisie_utilisateur.setText("");
             }
         });
 
@@ -108,15 +101,11 @@ public abstract class MathsQuestionsGUI extends JPanel {
         //TODO
         //ecouteur pour le bouton solution
         solution.addActionListener((ActionEvent ae) -> {
-            if (true) {
-                // on remet la couleur du bouton par defaut
-                checker.setBackground(Color.RED);
+            // on remet la couleur du bouton par defaut
+            checker.setBackground(Color.RED);
 
-                // on remet le JTextField vide
-                saisie_utilisateur.setText("La solution était : " /*+ resultat*/);
-            } else {
-                //TODO
-            }
+            // on remet le JTextField vide
+            saisie_utilisateur.setText("La solution était : " + getCurrentAnswer());
         });
 
         /**
@@ -157,4 +146,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
     public abstract Object genererQuestion();
 
     public abstract String genererIntitule();
+
+    public abstract String getCurrentAnswer();
 }

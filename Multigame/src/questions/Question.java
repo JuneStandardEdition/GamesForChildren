@@ -95,13 +95,23 @@ public class Question extends MathsQuestionsGUI {
 
     @Override
     public Question genererQuestion() {
+        int i = new Random().nextInt(30);
         QuestionsDAO qdao = new QuestionsDAO();
-        return qdao.find(new Random().nextInt(30));
+        this.id = qdao.find(i).getId();
+        this.question = qdao.find(i).getQuestion();
+        this.answer = qdao.find(i).getAnswer();
+        this.difficulty = qdao.find(i).getDifficulty();
+        return this;
     }
 
     @Override
     public String genererIntitule() {
-        genererQuestion();
-        return question;
+        return getQuestion();
+    }
+
+    @Override
+    public String getCurrentAnswer() {
+        System.out.println(getQuestion());
+        return answer;
     }
 }
