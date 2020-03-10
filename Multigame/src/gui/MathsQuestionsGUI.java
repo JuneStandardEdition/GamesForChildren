@@ -45,6 +45,9 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
     public abstract String getCurrentAnswer();
 
+    // Générique pour question ou calcul
+    Object o;
+
     public MathsQuestionsGUI(String title) {
         super();
         setBorder(BorderFactory.createTitledBorder(title));
@@ -68,13 +71,18 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
         // JPanel pour les intitulés
         questionPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+
         // JPanel pour les boutons
         buttonsPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        
         // JPanel pour la saisie
         saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         // Config label texte pour les intitulés : font
-        labelQuestion.setFont(new Font("Arial", Font.BOLD, 26));
+        Font font = new Font("Arial", Font.BOLD, 26);
+        labelQuestion.setFont(font);
+
+        
         // Ajout de l'emplacement pour l'intitulé du problème (question ou calcul)
         questionPane.add(labelQuestion);
 
@@ -87,22 +95,33 @@ public abstract class MathsQuestionsGUI extends JPanel {
         /**
          * Bouton VERIFICATION
          */
+        buttonsPane.add(checker);
+        buttonsPane.add(solution);
+        buttonsPane.add(questionSuivante);
+
+        //ecouteur pour le bouton vérification
         checker.addActionListener((ActionEvent ae) -> {
-            if (saisie_utilisateur.getText().equals("")) {
-                JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
-                        "ERREUR !", JOptionPane.PLAIN_MESSAGE);
-            } else if (saisie_utilisateur.getText().equals(getCurrentAnswer())) {
-                checker.setBackground(Color.GREEN);
-            } else {
-                checker.setBackground(Color.RED);
-                saisie_utilisateur.setText("");
+
+            if (true) {
+                if (saisie_utilisateur.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
+                            "ERREUR !", JOptionPane.PLAIN_MESSAGE);
+                } else if ((saisie_utilisateur.getText().equals(getCurrentAnswer()))) {
+                    checker.setBackground(Color.GREEN);
+                } /*
+                else if(!Integer.parseInt(saisie_utilisateur.getText()) = resultat){
+                    JOptionPane.showMessageDialog (null, "Erreur de saisie !!!",
+               "ERREUR !", JOptionPane.PLAIN_MESSAGE);
+                 */ else {
+                    checker.setBackground(Color.RED);
+                    saisie_utilisateur.setText("");
+                }
             }
         });
-        buttonsPane.add(checker);
 
-        /**
-         * Bouton SOLUTION
-         */
+        //test evenement entré pour valider
+        //TODO
+        //ecouteur pour le bouton solution
         solution.addActionListener((ActionEvent ae) -> {
             // on remet la couleur du bouton par defaut
             checker.setBackground(Color.RED);
@@ -110,11 +129,10 @@ public abstract class MathsQuestionsGUI extends JPanel {
             // on remet le JTextField vide
             saisie_utilisateur.setText("La solution était : " + getCurrentAnswer());
         });
-        buttonsPane.add(solution);
 
-        /**
-         * Bouton SUIVANT
-         */
+       
+        // = buttonsPane.add(questionSuivante);
+        // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
             // On remet la couleur du bouton "Verifier" par défaut
             checker.setBackground(null);
@@ -124,8 +142,8 @@ public abstract class MathsQuestionsGUI extends JPanel {
             saisie_utilisateur.requestFocusInWindow();
             genererQuestion();
             labelQuestion.setText(genererIntitule());
+            
         });
-        buttonsPane.add(questionSuivante);
 
         // Jpanel pour la saisie utilisateur
         JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.CENTER);
@@ -140,7 +158,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
         add(questionPane);
         add(saisiePane);
-
         add(buttonsPane);
     }
 }

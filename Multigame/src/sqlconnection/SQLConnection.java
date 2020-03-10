@@ -40,5 +40,9 @@ public class SQLConnection {
         System.out.println("Connecté à la base de données " + base + " avec l'URL " + url);
         return c;
     }
-     
+
+    public static String getPassword() {
+        return password;
+    }
+   
 }
