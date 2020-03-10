@@ -3,11 +3,12 @@ package gui;
 import java.util.Random;
 import questions.Question;
 import questions.QuestionsDAO;
+import settings.Settings;
 
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.1
+ * @version 0.1.2
  * @date 09-03-2020.15:10
  *
  *************************************************
@@ -24,8 +25,11 @@ public class QuestionGUI extends MathsQuestionsGUI {
 
     @Override
     public Question genererQuestion() {
+        Settings s = new Settings();
         QuestionsDAO qdao = new QuestionsDAO();
-        q = qdao.find(new Random().nextInt(30));
+        do {
+            q = qdao.find(new Random().nextInt(30));
+        } while (s.getQuestionsDifficulty() != q.difficulty);
         return q;
     }
 
