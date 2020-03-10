@@ -55,11 +55,11 @@ public class Calcul {
     // Génération du nombre 2 selon la difficulté
     public int genererNb2() {
         Random rd = new Random();
-        int i = 0;
+        int i;
         if (difficulty == 1) {
-            while (i > nb1) {
-                i = rd.nextInt(9);
-            }
+            do {
+                i = rd.nextInt(10);
+            } while (i >= nb1);
         } else {
             i = rd.nextInt(1000);
         }

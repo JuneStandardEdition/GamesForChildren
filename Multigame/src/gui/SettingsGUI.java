@@ -16,22 +16,28 @@ import settings.Settings;
 public class SettingsGUI extends JPanel {
 
     static Settings Settings;
+    JPanel mathsSetting;
+    JPanel questionSetting;
+    JButton saveSettings;
 
     public SettingsGUI() {
         // Calls for JPanel()
         super();
-        // Loads current Settings
-        Settings = new Settings();
 
         // Global pane for Settings tab
         setLayout(new GridLayout(5, 1));
 
-        JPanel mathsSetting = initLevelSelection("Calcul");
-        JPanel questionSetting = initLevelSelection("Question");
+        // Loads current Settings
+        Settings = new Settings();
+
+        mathsSetting = initLevelSelection("Calcul");
+        questionSetting = initLevelSelection("Question");
+        saveSettings = saveButton();
 
         // Adds JPanel to SettingsGUI
         add(mathsSetting);
         add(questionSetting);
+        add(saveSettings);
     }
 
     /*
@@ -46,8 +52,19 @@ public class SettingsGUI extends JPanel {
         // Buttons to select level of difficulty (applied to every game)
         ButtonGroup levelSelectionButtonGrp = new ButtonGroup();
         JRadioButton levelSelection1 = new JRadioButton("Niveau 1");
-        levelSelection1.setSelected(true);
         JRadioButton levelSelection2 = new JRadioButton("Niveau 2");
+
+        if (gameLabel.equals("Calcul") && Settings.getMathsDifficulty() == 1) {
+            levelSelection1.setSelected(true);
+        } else if (gameLabel.equals("Calcul") && Settings.getMathsDifficulty() == 2) {
+            levelSelection2.setSelected(true);
+        }
+
+        if (gameLabel.equals("Question") && Settings.getQuestionsDifficulty() == 1) {
+            levelSelection1.setSelected(true);
+        } else if (gameLabel.equals("Question") && Settings.getQuestionsDifficulty() == 2) {
+            levelSelection2.setSelected(true);
+        }
 
         levelSelection1.addActionListener((ActionEvent ae) -> {
             if (gameLabel.equals("Calcul")) {
@@ -73,6 +90,18 @@ public class SettingsGUI extends JPanel {
         levelSelection.add(levelSelection2);
         // Returns JPanel
         return levelSelection;
+    }
+
+    private static JButton saveButton() {
+        JButton jbsave = new JButton();
+        jbsave.setPreferredSize(new Dimension(140, 70));
+        jbsave.setText("Sauvegarder");
+        jbsave.addActionListener((ActionEvent ae) -> {
+            Settings.saveSettings();
+            System.out.println("Hello");
+        });
+
+        return jbsave;
     }
 
 }

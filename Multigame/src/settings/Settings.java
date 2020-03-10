@@ -1,8 +1,10 @@
 package settings;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.Properties;
 
 /**
@@ -15,7 +17,6 @@ import java.util.Properties;
  */
 public class Settings {
 
-    // Properties object to read from properties file
     Properties prop;
     // Defines difficulty for Maths game: false is level 1, true is level 2
     int mathsDifficulty;
@@ -24,7 +25,6 @@ public class Settings {
     // Defines if whether or not user is admin
     boolean adminMode;
 
-    /* CONSTRUCTOR: private so it cannot be instantiated, also, default value false */
     public Settings() {
         prop = new Properties();
         loadSettings();
@@ -37,6 +37,18 @@ public class Settings {
             setMathsDifficulty(Integer.parseInt(prop.getProperty("mathsDifficulty")));
             setQuestionsDifficulty(Integer.parseInt(prop.getProperty("questionDifficulty")));
             setAdminMode(Boolean.parseBoolean(prop.getProperty("mathsDifficulty")));
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    /* Saves all settings from object to properties file */
+    public void saveSettings() {
+        try (OutputStream os = new FileOutputStream("src/settings/Settings.properties")) {
+            prop.setProperty("mathsDifficulty", mathsDifficulty + "");
+            prop.setProperty("questionDifficulty", questionsDifficulty + "");
+            prop.setProperty("adminMode", adminMode + "");
+            prop.store(os, null);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
