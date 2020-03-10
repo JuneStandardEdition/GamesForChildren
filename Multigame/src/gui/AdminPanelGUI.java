@@ -17,6 +17,8 @@ import questions.QuestionsDAO;
  *************************************************
  */
 public class AdminPanelGUI extends JPanel {
+    
+    QuestionsDAO qu = new QuestionsDAO();
 
     //Jpanel pour le choix modifier / ajouter / supprimer
     JPanel choixActionBoutton;
@@ -49,7 +51,6 @@ public class AdminPanelGUI extends JPanel {
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         choixActionBoutton = new JPanel();
-        jcq = new JComboBox<>();
 
         //initialisation des boutons de choixAction
         modifier = new JButton("Modifier");
@@ -100,27 +101,22 @@ public class AdminPanelGUI extends JPanel {
             } else {
                 q.difficulty = 2;
             }
-            QuestionsDAO qu = new QuestionsDAO();
+            
             qu.create(q);
         }));
 
         choixActionBoutton.add(supprimer);
+        
         //ajout de l'ecouteur au bouton supprimer
         supprimer.addActionListener(((ae) -> {
 
-            QuestionsDAO qu = new QuestionsDAO();
-            ArrayList<Question> qdao = new ArrayList<>();
-            qdao = (ArrayList<Question>) qu.getAll();
+            jcq = new JComboBox(qu.getAll().toArray());
 
             /*
-            for (int i = 0; i < qdao.size(); i++) {
-                jcq.addItem(qdao);
+            for(Question i : qdao2){
+                jcq.addItem(qdao2);
             }
              */
-            for(Question i : qdao){
-                jcq.addItem(qdao);
-            }
-
         }));
 
         //Jpanel gererQuestion
