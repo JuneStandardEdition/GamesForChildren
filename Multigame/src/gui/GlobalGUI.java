@@ -1,11 +1,7 @@
 package gui;
 
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.sql.Connection;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,8 +12,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import questions.Calcul;
-import questions.Question;
 import sqlconnection.SQLConnection;
 import static sqlconnection.SQLConnection.getPassword;
 
@@ -33,6 +27,7 @@ public final class GlobalGUI extends JFrame {
     JPanel maths;
     JPanel qust;
     JPanel ardoise;
+    JPanel admin;
 
     /*
      * Global GUI
@@ -60,6 +55,7 @@ public final class GlobalGUI extends JFrame {
         maths = new CalculGUI("Maths");
         qust = new QuestionGUI("QnA");
         ardoise = new ArdoiseGUI();
+        admin = new AdminPanelGUI();
 
         jtp = new JTabbedPane();
         jtp.addTab("Ardoise", (JPanel) ardoise);

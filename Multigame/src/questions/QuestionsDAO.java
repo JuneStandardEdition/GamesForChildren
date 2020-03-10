@@ -19,7 +19,7 @@ import java.util.logging.Logger;
  */
 public class QuestionsDAO implements DAO<Question> {
 
-    ArrayList<Question> qdao = new ArrayList<>();
+   public ArrayList<Question> qdao = new ArrayList<>();
 
     public List<Question> getAll() {
         String sqlQuery = "SELECT * FROM questions";

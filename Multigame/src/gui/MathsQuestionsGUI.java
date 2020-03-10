@@ -131,7 +131,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
         });
 
        
-        // = buttonsPane.add(questionSuivante);
         // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
             // On remet la couleur du bouton "Verifier" par défaut

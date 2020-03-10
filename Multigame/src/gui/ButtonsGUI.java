@@ -2,11 +2,8 @@ package gui;
 
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import gui.MathsQuestionsGUI;
-import java.lang.Class;
 
 /**
  *
