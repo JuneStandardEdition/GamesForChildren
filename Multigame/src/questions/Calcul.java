@@ -1,11 +1,11 @@
 package questions;
 
 import java.util.Random;
-import static settings.Settings.DIFFICULTE_1;
+import settings.Settings;
 
 /**
  * ************************************************
- * @author will.i.am
+ * @author will.i.am & June.QL
  * @version 0.1.3
  * @date 09-03-2020.9:33
  *
@@ -13,42 +13,38 @@ import static settings.Settings.DIFFICULTE_1;
  */
 public class Calcul {
 
-    public Integer nb1;
-    public Integer nb2;
-    public Integer result;
+    public int difficulty;
+    public int nb1;
+    public int nb2;
     public String signe;
+    public int result;
 
     public Calcul() {
+        difficulty = getDifficultyFromProp();
         nb1 = genererNb1();
         nb2 = genererNb2();
         signe = genererSigne();
         result = genererResult();
     }
 
-    public Calcul(int nb1, int nb2, int resultat, String signe) {
+    public Calcul(int nb1, int nb2, int resultat, String signe, int difficulty) {
+        this.difficulty = difficulty;
         this.nb1 = nb1;
         this.nb2 = nb2;
         this.signe = signe;
         this.result = resultat;
     }
 
-    public Calcul(String title) {
-        this.result = genererResult();
-    }
-
-    public Calcul(Integer nb1, Integer nb2, String signe) {
-        this.nb1 = nb1;
-        this.nb2 = nb2;
-        this.signe = signe;
-        this.result = genererResult();
-
+    private int getDifficultyFromProp() {
+        Settings st = new Settings();
+        return st.getMathsDifficulty();
     }
 
     // Génération du nombre 1 selon la difficulté
     public int genererNb1() {
         Random rd = new Random();
         int i;
-        if (DIFFICULTE_1) {
+        if (difficulty == 1) {
             i = rd.nextInt(10);
         } else {
             i = rd.nextInt(1000);
@@ -60,11 +56,10 @@ public class Calcul {
     public int genererNb2() {
         Random rd = new Random();
         int i;
-        if (DIFFICULTE_1) {
+        if (difficulty == 1) {
             do {
-                i = rd.nextInt(9);
-            } while (i > nb1);
-
+                i = rd.nextInt(10);
+            } while (i >= nb1);
         } else {
             i = rd.nextInt(1000);
         }
@@ -81,7 +76,7 @@ public class Calcul {
 
         Random rd = new Random();
 
-        if (DIFFICULTE_1) {
+        if (difficulty == 1) {
 
             choixCalcul = rd.nextInt(2);
 
@@ -154,9 +149,8 @@ public class Calcul {
         this.signe = signe;
     }
 
-    @Override
-    public String toString() {
-        return nb1 + signe + nb2 + " = " + result;
+    public int getDifficulty() {
+        return difficulty;
     }
 
 }

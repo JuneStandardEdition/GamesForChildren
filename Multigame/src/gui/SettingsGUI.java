@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import static settings.Settings.DIFFICULTE_1;
+import settings.Settings;
 
 /**
  * ************************************************
@@ -15,15 +15,29 @@ import static settings.Settings.DIFFICULTE_1;
  */
 public class SettingsGUI extends JPanel {
 
+    static Settings Settings;
+    JPanel mathsSetting;
+    JPanel questionSetting;
+    JButton saveSettings;
+
     public SettingsGUI() {
         // Calls for JPanel()
         super();
+
         // Global pane for Settings tab
         setLayout(new GridLayout(5, 1));
 
+        // Loads current Settings
+        Settings = new Settings();
+
+        mathsSetting = initLevelSelection("Calcul");
+        questionSetting = initLevelSelection("Question");
+        saveSettings = saveButton();
+
         // Adds JPanel to SettingsGUI
-        add(initLevelSelection("Calcul"));
-        add(initLevelSelection("Question"));
+        add(mathsSetting);
+        add(questionSetting);
+        add(saveSettings);
     }
 
     /*
@@ -35,20 +49,39 @@ public class SettingsGUI extends JPanel {
         JPanel levelSelection = new JPanel();
         levelSelection.setLayout(new GridLayout(1, 3));
         JLabel gameNameLabel = new JLabel(gameLabel);
-        // Buttons to select level of diffculty (applied to every game)
+        // Buttons to select level of difficulty (applied to every game)
         ButtonGroup levelSelectionButtonGrp = new ButtonGroup();
         JRadioButton levelSelection1 = new JRadioButton("Niveau 1");
-        levelSelection1.setSelected(true);
         JRadioButton levelSelection2 = new JRadioButton("Niveau 2");
-        // Ajouts ecouteurs pour les bouttons
-        levelSelection2.addActionListener((ActionEvent ae) -> {
-            DIFFICULTE_1 = !DIFFICULTE_1;
-        });
+
+        if (gameLabel.equals("Calcul") && Settings.getMathsDifficulty() == 1) {
+            levelSelection1.setSelected(true);
+        } else if (gameLabel.equals("Calcul") && Settings.getMathsDifficulty() == 2) {
+            levelSelection2.setSelected(true);
+        }
+
+        if (gameLabel.equals("Question") && Settings.getQuestionsDifficulty() == 1) {
+            levelSelection1.setSelected(true);
+        } else if (gameLabel.equals("Question") && Settings.getQuestionsDifficulty() == 2) {
+            levelSelection2.setSelected(true);
+        }
+
         levelSelection1.addActionListener((ActionEvent ae) -> {
-            DIFFICULTE_1 = true;
+            if (gameLabel.equals("Calcul")) {
+                Settings.setMathsDifficulty(1);
+            } else {
+                Settings.setQuestionsDifficulty(1);
+            }
+        });
+        levelSelection2.addActionListener((ActionEvent ae) -> {
+            if (gameLabel.equals("Calcul")) {
+                Settings.setMathsDifficulty(2);
+            } else {
+                Settings.setQuestionsDifficulty(2);
+            }
         });
 
-        // Adds JRadioButton to ButtonGroup (manages buttons comportement)
+        // Adds JRadioButton to ButtonGroup (manages behavior)
         levelSelectionButtonGrp.add(levelSelection1);
         levelSelectionButtonGrp.add(levelSelection2);
         // Adds components to pane
@@ -57,6 +90,18 @@ public class SettingsGUI extends JPanel {
         levelSelection.add(levelSelection2);
         // Returns JPanel
         return levelSelection;
+    }
+
+    private static JButton saveButton() {
+        JButton jbsave = new JButton();
+        jbsave.setPreferredSize(new Dimension(140, 70));
+        jbsave.setText("Sauvegarder");
+        jbsave.addActionListener((ActionEvent ae) -> {
+            Settings.saveSettings();
+            System.out.println("Hello");
+        });
+
+        return jbsave;
     }
 
 }

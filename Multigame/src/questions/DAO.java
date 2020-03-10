@@ -1,12 +1,12 @@
 package questions;
 
-import sqlconnection.SQLConnection;
+import connections.SQLConnection;
 import java.sql.Connection;
 
 /**
  * ************************************************
  * @author June.QL
- * @version
+ * @version 0.1.1
  * @date 28-02-2020.12:52
  *
  *************************************************
