@@ -17,7 +17,7 @@ import questions.Question;
 /**
  * ************************************************
  * @author June.QL
- * @version 0.2.2
+ * @version 0.2.3
  * @date 05-03-2020.10:00
  *
  *************************************************
@@ -74,7 +74,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
         // JPanel pour les boutons
         buttonsPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        
+
         // JPanel pour la saisie
         saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -82,7 +82,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
         Font font = new Font("Arial", Font.BOLD, 26);
         labelQuestion.setFont(font);
 
-        
         // Ajout de l'emplacement pour l'intitulé du problème (question ou calcul)
         questionPane.add(labelQuestion);
 
@@ -92,57 +91,56 @@ public abstract class MathsQuestionsGUI extends JPanel {
         questionSuivante.setPreferredSize(new Dimension(175, 75));
 
         // Ajout des boutons
-        /**
-         * Bouton VERIFICATION
-         */
         buttonsPane.add(checker);
         buttonsPane.add(solution);
         buttonsPane.add(questionSuivante);
+        questionSuivante.setEnabled(false);
 
-        //ecouteur pour le bouton vérification
+        /**
+         * Bouton VERIFICATION
+         */
+        // Ecouteur pour le bouton vérification
         checker.addActionListener((ActionEvent ae) -> {
 
-            if (true) {
-                if (saisie_utilisateur.getText().equals("")) {
-                    JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
-                            "ERREUR !", JOptionPane.PLAIN_MESSAGE);
-                } else if ((saisie_utilisateur.getText().equals(getCurrentAnswer()))) {
-                    checker.setBackground(Color.GREEN);
-                } /*
-                else if(!Integer.parseInt(saisie_utilisateur.getText()) = resultat){
-                    JOptionPane.showMessageDialog (null, "Erreur de saisie !!!",
-               "ERREUR !", JOptionPane.PLAIN_MESSAGE);
-                 */ else {
-                    checker.setBackground(Color.RED);
-                    saisie_utilisateur.setText("");
-                }
+            if (saisie_utilisateur.getText().equals("")) {
+                JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
+                        "ERREUR !", JOptionPane.PLAIN_MESSAGE);
+            } else if (saisie_utilisateur.getText().equals(getCurrentAnswer())) {
+                checker.setBackground(Color.GREEN);
+                checker.setEnabled(false);
+                solution.setEnabled(false);
+                questionSuivante.setEnabled(true);
+            } else {
+                checker.setBackground(Color.RED);
+                saisie_utilisateur.setText("");
             }
         });
 
-        //test evenement entré pour valider
-        //TODO
-        //ecouteur pour le bouton solution
+        // Ecouteur pour le bouton solution
         solution.addActionListener((ActionEvent ae) -> {
             // on remet la couleur du bouton par defaut
             checker.setBackground(Color.RED);
+            checker.setEnabled(false);
+            solution.setEnabled(false);
+            questionSuivante.setEnabled(true);
 
             // on remet le JTextField vide
             saisie_utilisateur.setText("La solution était : " + getCurrentAnswer());
         });
 
-       
-        // = buttonsPane.add(questionSuivante);
         // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
             // On remet la couleur du bouton "Verifier" par défaut
             checker.setBackground(null);
+            checker.setEnabled(true);
+            solution.setEnabled(true);
+            questionSuivante.setEnabled(false);
 
             // On remet le JTextField de saisie utilisateur vide + Focus
             saisie_utilisateur.setText("");
             saisie_utilisateur.requestFocusInWindow();
             genererQuestion();
             labelQuestion.setText(genererIntitule());
-            
         });
 
         // Jpanel pour la saisie utilisateur

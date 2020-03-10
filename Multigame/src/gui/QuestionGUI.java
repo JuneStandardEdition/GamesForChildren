@@ -28,7 +28,7 @@ public class QuestionGUI extends MathsQuestionsGUI {
         Settings s = new Settings();
         QuestionsDAO qdao = new QuestionsDAO();
         do {
-            q = qdao.find(new Random().nextInt(30));
+            q = qdao.find(new Random().nextInt(qdao.getAll().size()));
         } while (s.getQuestionsDifficulty() != q.difficulty);
         return q;
     }
