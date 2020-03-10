@@ -7,6 +7,7 @@ package gui;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -20,9 +21,11 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JSlider;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 /**
  * @param args the command line arguments
@@ -146,13 +149,23 @@ public class ArdoiseGUI extends JPanel implements ActionListener {
 
         JButton carre = new JButton("carré");
         tb.add(carre, BorderLayout.EAST); // ajouter le bouton carré à la barre d'outil
-        Object[] elements = new Object[]{"2", "5", "7", "10", "15", "30"}; // créer une liste de taille
-        JComboBox listeTaille = new JComboBox(elements); // mettre cette liste dans une JComboBox
-        tb.add(listeTaille, BorderLayout.EAST);
-        listeTaille.addActionListener((ActionEvent ae) -> { // mettre un écouteur sur la JComboBox
-            size = Integer.parseInt((String) listeTaille.getSelectedItem()); // convertir la chaine de caractère en Integer
 
+        JSlider tailleCrayon = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
+
+        tailleCrayon.setMinorTickSpacing(2);
+        tailleCrayon.setMajorTickSpacing(10);
+        tailleCrayon.setPaintTicks(true);
+        tailleCrayon.setPaintLabels(true);
+
+        tb.add(tailleCrayon, BorderLayout.EAST);
+
+        tailleCrayon.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent ce) {
+                size = tailleCrayon.getValue();
+            }
         });
+
         carre.addActionListener(
                 (ActionEvent ae) -> {
                     type = "carré"; // définir le type du bouton carre "carré" pour gérer la condition dans "pressed" et "dragged"
