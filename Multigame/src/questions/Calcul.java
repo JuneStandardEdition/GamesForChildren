@@ -13,10 +13,10 @@ import static settings.Settings.DIFFICULTE_1;
  */
 public class Calcul {
 
-    public int nb1;
-    public int nb2;
+    public Integer nb1;
+    public Integer nb2;
+    public Integer result;
     public String signe;
-    public int result;
 
     public Calcul() {
         nb1 = genererNb1();
@@ -32,28 +32,42 @@ public class Calcul {
         this.result = resultat;
     }
 
+    public Calcul(String title) {
+        this.result = genererResult();
+    }
+
+    public Calcul(Integer nb1, Integer nb2, String signe) {
+        this.nb1 = nb1;
+        this.nb2 = nb2;
+        this.signe = signe;
+        this.result = genererResult();
+
+    }
+
     // Génération du nombre 1 selon la difficulté
     public int genererNb1() {
         Random rd = new Random();
-        int i = rd.nextInt(1000);
-        /*if (DIFFICULTE_1) {
+        int i;
+        if (DIFFICULTE_1) {
             i = rd.nextInt(10);
-        } else {*/
-        //}
+        } else {
+            i = rd.nextInt(1000);
+        }
         return i;
     }
 
     // Génération du nombre 2 selon la difficulté
     public int genererNb2() {
         Random rd = new Random();
-        int i = 0;
-        /*if (DIFFICULTE_1) {
-            while (i > nb1) {
+        int i;
+        if (DIFFICULTE_1) {
+            do {
                 i = rd.nextInt(9);
-            }
-        } else {*/
-        i = rd.nextInt(1000);
-        //}
+            } while (i > nb1);
+
+        } else {
+            i = rd.nextInt(1000);
+        }
         return i;
     }
 
