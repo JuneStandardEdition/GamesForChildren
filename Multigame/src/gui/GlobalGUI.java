@@ -15,6 +15,9 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+
+
+
 /**
  *
  * @author Will I Am & June.QL (ça fait du bien à l'égo, mais j'ai bcp codé ici
@@ -27,6 +30,7 @@ public final class GlobalGUI extends JFrame {
     JPanel maths;
     JPanel qust;
     JPanel ardoise;
+    JPanel admin;
 
     /*
      * Global GUI
@@ -54,6 +58,7 @@ public final class GlobalGUI extends JFrame {
         maths = new CalculGUI("Maths");
         qust = new QuestionGUI("QnA");
         ardoise = new ArdoiseGUI();
+        admin = new AdminPanelGUI();
 
         jtp = new JTabbedPane();
         jtp.addTab("Ardoise", (JPanel) ardoise);

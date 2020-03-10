@@ -130,6 +130,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             saisie_utilisateur.setText("La solution était : " + getCurrentAnswer());
         });
 
+
         // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
             // On remet la couleur du bouton "Verifier" par défaut
