@@ -80,7 +80,7 @@ public class QuestionsDAO implements DAO<Question> {
     @Override
     public void update(Question q) {
         try {
-            String req = "UPDATE questions SET question = ?, reponse = ?, difficulty = ? WHERE id = ?";
+            String req = "UPDATE questions SET question = ?, answer = ?, difficulty = ? WHERE id = ?";
             PreparedStatement pstmt = CONNEXION.prepareStatement(req);
             pstmt.setString(1, q.getQuestion());
             pstmt.setString(2, q.getAnswer());

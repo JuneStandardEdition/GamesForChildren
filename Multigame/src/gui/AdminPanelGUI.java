@@ -3,7 +3,6 @@ package gui;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
-import java.util.ArrayList;
 import javax.swing.*;
 import questions.Question;
 import questions.QuestionsDAO;
@@ -17,8 +16,10 @@ import questions.QuestionsDAO;
  *************************************************
  */
 public class AdminPanelGUI extends JPanel {
-    
+
     QuestionsDAO qu = new QuestionsDAO();
+
+    private Integer ID;
 
     //Jpanel pour le choix modifier / ajouter / supprimer
     JPanel choixActionBoutton;
@@ -30,6 +31,7 @@ public class AdminPanelGUI extends JPanel {
     JPanel gererQuestion;
     JPanel gererReponse;
     JPanel gererDifficultee;
+    JPanel gererId;
 
     //Boutons du Jpanel choixAction
     JButton modifier;
@@ -41,6 +43,8 @@ public class AdminPanelGUI extends JPanel {
     JTextField questions;
     JLabel rep;
     JTextField reponse;
+    JLabel id;
+    JTextField idtext;
     ButtonGroup selectlvl;
     JLabel difficultee;
     JRadioButton level1;
@@ -48,6 +52,8 @@ public class AdminPanelGUI extends JPanel {
 
     public AdminPanelGUI() {
         super();
+
+        jcq = new JComboBox(qu.getAll().toArray());
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         choixActionBoutton = new JPanel();
@@ -64,6 +70,9 @@ public class AdminPanelGUI extends JPanel {
         gererReponse = new JPanel();
         rep = new JLabel("Reponse");
         reponse = new JTextField(40);
+        gererId = new JPanel();
+        id = new JLabel("ID");
+        idtext = new JTextField(5);
         gererDifficultee = new JPanel();
         selectlvl = new ButtonGroup();
         difficultee = new JLabel();
@@ -91,6 +100,18 @@ public class AdminPanelGUI extends JPanel {
         //ajout de l'ecouteur au bouton modifier
 
         choixActionBoutton.add(ajouter);
+
+        //action listener pour la jcombo box
+        jcq.addActionListener(e -> {
+            Question q = (Question) jcq.getSelectedItem();
+            //on recupere la question dans le textfield question
+            questions.setText(q.getQuestion());
+            //on recupere la question dans le textfield question
+            reponse.setText(q.getAnswer());
+            idtext.setText(q.getId().toString());
+            ID = Integer.parseInt(idtext.getText());
+        });
+
         //ajout de l'ecouteur au bouton ajouter
         ajouter.addActionListener(((ae) -> {
             Question q = new Question();
@@ -101,22 +122,30 @@ public class AdminPanelGUI extends JPanel {
             } else {
                 q.difficulty = 2;
             }
-            
+
             qu.create(q);
         }));
 
         choixActionBoutton.add(supprimer);
-        
         //ajout de l'ecouteur au bouton supprimer
         supprimer.addActionListener(((ae) -> {
+            Question q = new Question();
+            qu.delete(ID);
+        }));
 
-            jcq = new JComboBox(qu.getAll().toArray());
-
-            /*
-            for(Question i : qdao2){
-                jcq.addItem(qdao2);
+        //ajout de l'ecouteur au bouton modifier
+        modifier.addActionListener(((ae) -> {
+            Question q = new Question();
+            q.question = questions.getText();
+            q.answer = reponse.getText();
+            if (level1.isSelected()) {
+                q.difficulty = 1;
+            } else {
+                q.difficulty = 2;
             }
-             */
+            q.id = ID;
+            
+            qu.update(q);
         }));
 
         //Jpanel gererQuestion
@@ -132,6 +161,13 @@ public class AdminPanelGUI extends JPanel {
         gererReponse.add(rep);
         //ajout du Jtextfield
         gererReponse.add(reponse);
+
+        //JPanel gererID
+        gererId.setLayout(new FlowLayout(FlowLayout.CENTER));
+        //ajout du label
+        gererId.add(id);
+        //ajout du JTextfield
+        gererId.add(idtext);
 
         //Jpanel gererDifficultee
         selectlvl.add(level1);
@@ -150,6 +186,7 @@ public class AdminPanelGUI extends JPanel {
         add(jcq);
         add(gererQuestion);
         add(gererReponse);
+        add(gererId);
         add(gererDifficultee);
     }
 
