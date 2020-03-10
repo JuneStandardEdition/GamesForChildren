@@ -17,16 +17,16 @@ import java.util.logging.Logger;
  *
  *************************************************
  */
-public class QuestionsDAO implements DAO<Questions> {
+public class QuestionsDAO implements DAO<Question> {
 
-    ArrayList<Questions> qdao = new ArrayList<>();
+    ArrayList<Question> qdao = new ArrayList<>();
 
-    public List<Questions> getAll() {
+    public List<Question> getAll() {
         String sqlQuery = "SELECT * FROM questions";
         try (Statement stmt = CONNEXION.createStatement()) {
             ResultSet resSetQuestion = stmt.executeQuery(sqlQuery);
             while (resSetQuestion.next()) {
-                qdao.add(new Questions(resSetQuestion.getInt("id"), resSetQuestion.getString("question"), resSetQuestion.getString("answer"), resSetQuestion.getInt("difficulty")));
+                qdao.add(new Question(resSetQuestion.getInt("id"), resSetQuestion.getString("question"), resSetQuestion.getString("answer"), resSetQuestion.getInt("difficulty")));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -35,15 +35,15 @@ public class QuestionsDAO implements DAO<Questions> {
     }
 
     @Override
-    public Questions find(Integer id) {
-        Questions qst = null;
+    public Question find(Integer id) {
+        Question qst = null;
         try {
             String req = "SELECT * FROM questions WHERE id = ?";
             PreparedStatement pstmt = CONNEXION.prepareStatement(req);
             pstmt.setInt(1, id);
             ResultSet result = pstmt.executeQuery();
             if (result.first()) {
-                qst = new Questions(result.getInt("id"), result.getString("question"), result.getString("answer"), result.getInt("difficulty"));
+                qst = new Question(result.getInt("id"), result.getString("question"), result.getString("answer"), result.getInt("difficulty"));
             }
         } catch (SQLException ex) {
             Logger.getLogger(QuestionsDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -52,7 +52,7 @@ public class QuestionsDAO implements DAO<Questions> {
     }
 
     @Override
-    public void create(Questions q) {
+    public void create(Question q) {
         try {
             String req = "INSERT INTO questions (question, answer, difficulty) VALUES (?,?,?)";
             PreparedStatement pstmt = CONNEXION.prepareStatement(req);
@@ -78,7 +78,7 @@ public class QuestionsDAO implements DAO<Questions> {
     }
 
     @Override
-    public void update(Questions q) {
+    public void update(Question q) {
         try {
             String req = "UPDATE questions SET question = ?, reponse = ?, difficulty = ? WHERE id = ?";
             PreparedStatement pstmt = CONNEXION.prepareStatement(req);

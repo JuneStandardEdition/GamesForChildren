@@ -15,4 +15,17 @@ INSERT INTO `questions` (`id`, `question`, `answer`, `difficulty`) VALUES
 (14, 'Quel animal miaule ?','chat',1),
 (15, 'Aujourd hui, je suis une chenille, demain, je serai un... ?','papillon',1),
 (16, 'A quel mois de l année passe le Père Noël ?','decembre',1),
-(17, 'A quelle saison les arbres perdent-ils leur feuillage ?','automne',2);
+(17, 'A quelle saison les arbres perdent-ils leur feuillage ?','automne',2),
+(18, 'De quelle couleur est un pissenlit ?','jaune',1),
+(19, 'Quel animal est le meilleur ami de l Homme ?','chien',1),
+(20, 'Comment appelle-t-on un habitant de la planète Mars ?','Martien',2),
+(21, 'Quel est le pays le moins peuplé du monde ?','vatican',2),
+(22, 'Quel est le pays le plus peuplé du monde ?','chine',1),
+(23, 'Qui a dit "Alea Jacta Est" ?','cesar',2),
+(24, 'Quel animal de la savane a un long cou ?','girafe',1),
+(25, 'Comment dit-on "noir" en anglais ?','black',1),
+(26, 'Sur quelle classe Marine s est-elle prise la tête pendant 3 semaines ?','ardoise',1),
+(27, 'Dans quelle pièce de la maison prépare-t-on à manger ?','cuisine',1),
+(28, 'Quel animal court au galop ?','cheval',1),
+(29, 'Quel animal surnomme-t-on le roi de la savane ?','lion',1),
+(30, 'Quand j ai rédigé ces questions, de quoi ai-je manqué ?','inspiration',1);

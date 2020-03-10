@@ -3,259 +3,182 @@ package gui;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import java.awt.GridLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
-import java.util.Random;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import questions.QuestionsDAO;
-import static settings.Settings.DIFFICULTE_1;
+import questions.*;
 
 /**
  * ************************************************
  * @author June.QL
- * @version 0.2.1
+ * @version 0.2.2
  * @date 05-03-2020.10:00
  *
  *************************************************
  */
-public class MathsQuestionsGUI extends JPanel {
+public abstract class MathsQuestionsGUI extends JPanel {
 
-    // True = Maths Tab, False = QnA Tab
-    boolean mathsOrQuestion;
+    // JPanel pour afficher le problème (question ou calcul)
+    JPanel questionPane;
+    // JPanel TextField user answer
+    JPanel saisiePane;
+    // ButtonsGUI boutons = new ButtonsGUI();
+    JPanel buttonsPane;
+    // Génère une String d'un Calcul ou d'une Question
+    protected JLabel labelQuestion;
+    // JTF user entry
+    JTextField saisie_utilisateur = new JTextField(30);
+    // JButtons
+    JButton checker;
+    JButton solution;
+    JButton questionSuivante;
+    // Générique pour question ou calcul
+    Object o;
 
-    public MathsQuestionsGUI(String title, boolean whichIsTheTab) {
-
+    public MathsQuestionsGUI(String title) {
         super();
-        this.mathsOrQuestion = whichIsTheTab;
         setBorder(BorderFactory.createTitledBorder(title));
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+
+        questionPane = new JPanel();
+        saisiePane = new JPanel();
+        buttonsPane = new JPanel();
+        labelQuestion = new JLabel();
+        checker = new JButton("Vérification");
+        solution = new JButton("Solution");
+        questionSuivante = new JButton("Suivant");
 
         initGUI();
     }
 
+    /**
+     * Inits base GUI for Calcul and Question
+     */
     private void initGUI() {
 
-        // JPanel pour afficher le problème (question ou calcul)
-        JPanel problemLabelPane = new JPanel();
-        // JPanel TextField user answer
-        JPanel saisiePane = new JPanel();
-        problemLabelPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        questionPane.setLayout(new FlowLayout(FlowLayout.CENTER));
+        Font font = new Font("Arial", Font.BOLD, 50);
+        labelQuestion.setFont(font);
 
-        // Génère une String d'un Calcul ou d'une Question
-        JLabel labelProblemString = new JLabel();
-        if (this.mathsOrQuestion) {
-            int nb1 = genererNb1();
-            int nb2 = genererNb2();
-            labelProblemString.setText(genererCalcul(nb1, nb2));
-        } else {
-            labelProblemString.setText(genererQuestion());
-        }
-        problemLabelPane.add(labelProblemString);
-
+        questionPane.add(labelQuestion);
         // JPanel pour afficher les boutons d'options
         // Appel fonction creerBoutons
-        // ButtonsGUI boutons = new ButtonsGUI();
-        JPanel buttonsPane = new JPanel();
         buttonsPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        JButton verif = new JButton("Verification");
-        JButton solution = new JButton("Solution");
-        JButton questionSuivante = new JButton("Suivant");
-        verif.setPreferredSize(new Dimension(200, 75));
+        checker.setPreferredSize(new Dimension(200, 75));
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));
-        questionSuivante.addActionListener((ActionEvent ae) -> {
-            if (this.mathsOrQuestion) {
-                int nb1 = genererNb1();
-                int nb2 = genererNb2();
-                labelProblemString.setText(genererCalcul(nb1, nb2));
-            } else {
-                labelProblemString.setText(genererQuestion());
-            }
-        });
-        buttonsPane.add(verif);
+
+        // Ajout des boutons
+        /**
+         * Bouton VERIFICATION
+         */
+        buttonsPane.add(checker);
         buttonsPane.add(solution);
         buttonsPane.add(questionSuivante);
+        
+        // Ecouteur pour le bouton "Suivant"
+        questionSuivante.addActionListener((ActionEvent ae) -> {
+            //on remet la couleur du bouton par defaut
+            checker.setBackground(null);
+
+            //on remet le JTextField vide
+            saisie_utilisateur.setText("");
+            saisie_utilisateur.requestFocusInWindow();
+
+          //on recreer des un calcul aleatoire
+            // nb1 = genererNb1();
+            // nb2 = genererNb2(nb1);
+            // signe = genererSigne();
+            // labelProblemString.setText(nb1 + signe + nb2 + " = ");
+            // resultat = genererCalcul(nb1, signe, nb2);
+            //System.out.println(nb1 + signe + nb2 + " = " + resultat);
+            labelQuestion.setText(genererIntitule());
+
+        });
+
+        //ecouteur pour le bouton vérification
+        checker.addActionListener((ActionEvent ae) -> {
+            if (true) {
+                if (saisie_utilisateur.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
+                            "ERREUR !", JOptionPane.PLAIN_MESSAGE);
+                } else if (Integer.parseInt(saisie_utilisateur.getText()) == 0 /*resultat*/) {
+                    checker.setBackground(Color.GREEN);
+                } /*
+                else if(!Integer.parseInt(saisie_utilisateur.getText()) = resultat){
+                    JOptionPane.showMessageDialog (null, "Erreur de saisie !!!",
+               "ERREUR !", JOptionPane.PLAIN_MESSAGE);
+                 */ else {
+                    checker.setBackground(Color.RED);
+                    saisie_utilisateur.setText("");
+                }
+            } else {
+                //TODO
+            }
+        });
+
+        /**
+         * Bouton SOLUTION
+         */
+        buttonsPane.add(solution);
+        //test evenement entré pour valider
+        //TODO
+        //ecouteur pour le bouton solution
+        solution.addActionListener((ActionEvent ae) -> {
+            if (true) {
+                // on remet la couleur du bouton par defaut
+                checker.setBackground(Color.RED);
+
+                // on remet le JTextField vide
+                saisie_utilisateur.setText("La solution était : " /*+ resultat*/);
+            } else {
+                //TODO
+            }
+        });
+
+        /**
+         * Bouton SUIVANT
+         */
+        buttonsPane.add(questionSuivante);
+        // Ecouteur pour le bouton "Suivant"
+        questionSuivante.addActionListener((ActionEvent ae) -> {
+            //on remet la couleur du bouton par defaut
+            checker.setBackground(null);
+
+            //on remet le JTextField vide
+            saisie_utilisateur.setText("");
+            saisie_utilisateur.requestFocusInWindow();
+            labelQuestion.setText(genererIntitule());
+        });
 
         // Jpanel pour la saisie utilisateur
         saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.CENTER);
-        JTextField saisie_utilisateur = new JTextField(30);
+        Font font2 = new Font("Arial", Font.BOLD, 25);
+        reponse.setFont(font2);
+
+        saisie_utilisateur.setPreferredSize(new Dimension(200, 70));
+        saisie_utilisateur.setFont(font2);
+
         saisiePane.add(reponse);
         saisiePane.add(saisie_utilisateur);
+        saisie_utilisateur.requestFocusInWindow();
 
-        add(problemLabelPane);
+        add(questionPane);
         add(saisiePane);
+        
         add(buttonsPane);
+
+        saisie_utilisateur.requestFocusInWindow();
     }
 
-    public String genererQuestion() {
-        QuestionsDAO qdao = new QuestionsDAO();
-        return qdao.find(new Random().nextInt(17)).getQuestion();
+    public abstract Object genererQuestion();
 
-    }
-
-    // Génération du nombre 1 selon la difficulté
-    public int genererNb1() {
-        int i;
-        if (DIFFICULTE_1) {
-            Random rd = new Random();
-            i = rd.nextInt(9);
-        } else {
-            Random rd = new Random();
-            i = rd.nextInt(999);
-        }
-        return i;
-    }
-
-    // Génération du nombre 2 selon la difficulté
-    public int genererNb2() {
-        int i;
-        if (DIFFICULTE_1) {
-            Random rd = new Random();
-            i = rd.nextInt(9);
-        } else {
-            Random rd = new Random();
-            i = rd.nextInt(999);
-        }
-        return i;
-    }
-
-    public int genererCalculETResultat(int nb1, int nb2) {
-
-        int calcul, choixCalcul;
-        int min = 0;
-        int addition = 0;
-        int soustraction = 1;
-
-        if (DIFFICULTE_1) {
-
-            int max = 1;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-
-            if (choixCalcul == addition) {
-                calcul = nb1 + nb2;
-            } else {
-                calcul = nb1 - nb2;
-            }
-        } else {
-
-            int max = 2;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-
-            if (choixCalcul == addition) {
-                calcul = nb1 + nb2;
-            } else if (choixCalcul == soustraction) {
-                calcul = nb1 - nb2;
-            } else {
-                calcul = nb1 * nb2;
-            }
-        }
-
-        return calcul;
-    }
-
-    public String genererCalcul(int nb1, int nb2) {
-
-        String afficherCalcul = "";
-        int choixCalcul;
-        int min = 0;
-        int addition = 0;
-        int soustraction = 1;
-        if (DIFFICULTE_1) {
-
-            int max = 1;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-
-            if (choixCalcul == addition) {
-                afficherCalcul = nb1 + " + " + nb2 + " = ";
-            } else {
-                afficherCalcul = nb1 + " - " + nb2 + " = ";
-            }
-        } else {
-
-            int max = 2;
-            choixCalcul = min + (int) (Math.random() * ((max - min) + 1));
-
-            if (choixCalcul == addition) {
-                afficherCalcul = nb1 + " + " + nb2 + " = ";
-            } else if (choixCalcul == soustraction) {
-                afficherCalcul = nb1 + " - " + nb2 + " = ";
-            } else {
-                afficherCalcul = nb1 + " * " + nb2 + " = ";
-            }
-        }
-
-        return afficherCalcul;
-    }
-
-    //Fonction pr la gestion des evenements
-    private void initGUIMatch() {
-
-        JPanel afficherCalcul = new JPanel();
-        JPanel boutons = new JPanel();
-        JPanel saisie = new JPanel();
-
-        // Jpanel pour afficher le calcul
-        /**
-         * **********************************************************
-         */
-        afficherCalcul.setLayout(new FlowLayout(FlowLayout.LEFT));
-
-        String calcul = genererCalcul(genererNb1(), genererNb2());
-
-        JLabel calc = new JLabel(calcul, JLabel.LEFT);
-        afficherCalcul.add(calc);
-        /**
-         * **********************************************************
-         */
-        /**
-         * **********************************************************
-         */
-        //Jpanel pour la saisie utilisateur
-        /**
-         * **********************************************************
-         */
-        saisie.setLayout(new FlowLayout(FlowLayout.LEFT));
-        JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.LEFT);
-        JTextField saisie_utilisateur = new JTextField(15);
-        saisie.add(reponse);
-        saisie.add(saisie_utilisateur);
-        /**
-         * ***********************************************************
-         */
-
-        //Jpanel pour afficher les boutons d'options
-        /**
-         * **********************************************************
-         */
-        //essaie appels fonction creerBoutons
-        //ButtonsGUI boutons = new ButtonsGUI();
-        //add(boutons.creerBoutons("calcul"));
-        boutons.setLayout(new GridLayout(0, 3));
-        JButton verif = new JButton("Verification");
-        verif.addActionListener((ActionEvent ae) -> {
-
-            if (saisie_utilisateur.getText().equals(genererCalculETResultat(5, 3))) {
-                verif.setBackground(Color.GREEN);
-            } else {
-                verif.setBackground(Color.RED);
-            }
-        });
-
-        JButton solution = new JButton("Solution");
-        JButton questionSuivante = new JButton("Autre calcul");
-
-        boutons.add(verif);
-        boutons.add(solution);
-        boutons.add(questionSuivante);
-
-        add(afficherCalcul);
-        add(boutons);
-        add(saisie);
-    }
+    public abstract String genererIntitule();
 }

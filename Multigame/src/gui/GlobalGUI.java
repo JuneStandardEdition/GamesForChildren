@@ -2,13 +2,14 @@ package gui;
 
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import questions.Calcul;
+import questions.Question;
 
 /**
  *
@@ -45,12 +46,9 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
-        maths = new MathsQuestionsGUI("Maths", true);
-        qust = new MathsQuestionsGUI("QnA", false);
+        maths = new Calcul("Maths");
+        qust = new Question("QnA");
         ardoise = new ArdoiseGUI();
-
-        // Temporaire : Affiche un message dans QnA
-        JLabel jlbl = new JLabel("LEEROY");
 
         jtp = new JTabbedPane();
         jtp.addTab("Ardoise", (JPanel) ardoise);
@@ -67,6 +65,7 @@ public final class GlobalGUI extends JFrame {
         JMenu questions = new JMenu("Questions");
         JMenu settingsMenu = new JMenu("Paramètres");
         JMenu admin = new JMenu("Administration");
+        //JMenu subJMenu
 
         // Adds Menus
         menu.add(dessin);
@@ -74,10 +73,12 @@ public final class GlobalGUI extends JFrame {
         menu.add(questions);
         menu.add(settingsMenu);
         menu.add(admin);
+        
 
         // Adds content to JFrame and sets it visible
         f.add(jtp);
         f.setJMenuBar(menu);
         f.setVisible(true);
     }
+
 }

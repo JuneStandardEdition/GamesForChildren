@@ -30,9 +30,7 @@ public class ButtonsGUI extends JPanel {
         verif.setPreferredSize(new Dimension(200, 75));
         solution.setPreferredSize(new Dimension(200, 75));
         questionSuivante.setPreferredSize(new Dimension(200, 75));
-        /*questionSuivante.addActionListener((ActionEvent ae) -> {
-
-        });*/
+        
 
         this.add(verif);
         this.add(solution);
