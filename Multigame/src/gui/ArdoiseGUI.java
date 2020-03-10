@@ -4,9 +4,11 @@ package gui;
  *
  * @author marine
  */
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -66,21 +68,24 @@ public class ArdoiseGUI extends JPanel implements ActionListener {
         dessin.addMouseListener(
                 new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e
-            ) { // on clique sur la souris
+            public void mouseClicked(MouseEvent e) { // on clique sur la souris
                 Graphics g = dessin.getGraphics();
                 g.setColor(c);// on récupère la couleur, les x et y
 
                 x = e.getX();
                 y = e.getY();
                 setLabel(x, y);
-
                 if (type.equals("rond")) {// si le type est "rond", on compare la chaine de caractère type à "rond"
                     g.fillOval(x, y, size, size);// alors on trace en rond (coordonnées et taille)
                 } else {
                     g.fillRect(x, y, size, size);// sinon on trace en carré
                 }
+            }
 
+            @Override
+            public void mousePressed(MouseEvent e) {
+                x = e.getX();
+                y = e.getY();
             }
         }
         );
@@ -91,18 +96,18 @@ public class ArdoiseGUI extends JPanel implements ActionListener {
             @Override
             public void mouseDragged(MouseEvent e
             ) {// on clique sur la souris sans la lâcher
-                Graphics g = dessin.getGraphics(); // même chose que pour le "pressed"
+                Graphics2D g = (Graphics2D) dessin.getGraphics(); // même chose que pour le "pressed"
 
                 g.setColor(c);
-                x = e.getX();
-                y = e.getY();
 
                 if (type.equals("rond")) {
-                    g.fillOval(x, y, size, size);
+                    g.setStroke(new BasicStroke(size, BasicStroke.CAP_ROUND, BasicStroke.JOIN_ROUND));
                 } else {
-                    g.fillRect(x, y, size, size);
+                    g.setStroke(new BasicStroke(size, BasicStroke.CAP_SQUARE, BasicStroke.JOIN_MITER));
                 }
-
+                g.drawLine(x, y, e.getX(), e.getY());
+                x = e.getX();
+                y = e.getY();
             }
         }
         );
