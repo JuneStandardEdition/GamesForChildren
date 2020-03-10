@@ -1,29 +1,28 @@
 package questions;
 
-import gui.MathsQuestionsGUI;
-import java.util.Random;
-
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.4
+ * @version 0.1.6
  * @date 05-03-2020.09:38
  *
  *************************************************
  */
-public class Question extends MathsQuestionsGUI {
+public class Question {
 
-    Integer id;
-    String question;
-    String answer;
-    Integer difficulty;
+    public Integer id;
+    public String question;
+    public String answer;
+    public Integer difficulty;
 
-    public Question(String title) {
-        super(title);
+    public Question() {
+        id = 0;
+        question = "N/A ?";
+        answer = "N/A";
+        difficulty = 0;
     }
 
     public Question(Integer id, String qst, String ans, Integer diff) {
-        super("QnA");
         this.id = id;
         this.question = qst;
         this.answer = ans;
@@ -91,18 +90,5 @@ public class Question extends MathsQuestionsGUI {
                 .replaceAll("[ÿ]", "y")
                 .replaceAll("[ç]", "c")
                 .equals(answer);
-    }
-
-
-    public Question genererQuestion() {
-        QuestionsDAO qdao = new QuestionsDAO();
-        return qdao.find(new Random().nextInt(30));
-    }
-
-    @Override
-    public String genererIntitule() {
-        genererQuestion();
-        return question;
-
     }
 }

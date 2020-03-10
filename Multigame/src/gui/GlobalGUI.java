@@ -13,7 +13,8 @@ import questions.Question;
 
 /**
  *
- * @author Will I Am
+ * @author Will I Am & June.QL (ça fait du bien à l'égo, mais j'ai bcp codé ici
+ * aussi)
  */
 public final class GlobalGUI extends JFrame {
 
@@ -46,8 +47,8 @@ public final class GlobalGUI extends JFrame {
         };
 
         settings = new SettingsGUI();
-        maths = new Calcul("Maths");
-        qust = new Question("QnA");
+        maths = new CalculGUI("Maths");
+        qust = new QuestionGUI("QnA");
         ardoise = new ArdoiseGUI();
 
         jtp = new JTabbedPane();
@@ -73,7 +74,6 @@ public final class GlobalGUI extends JFrame {
         menu.add(questions);
         menu.add(settingsMenu);
         menu.add(admin);
-        
 
         // Adds content to JFrame and sets it visible
         f.add(jtp);
