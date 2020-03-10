@@ -7,7 +7,6 @@ package gui;
 import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -151,7 +150,7 @@ public class ArdoiseGUI extends JPanel implements ActionListener {
         tb.add(carre, BorderLayout.EAST); // ajouter le bouton carré à la barre d'outil
 
         JSlider tailleCrayon = new JSlider(JSlider.HORIZONTAL, 0, 50, 25);
-
+        tailleCrayon.setBorder(BorderFactory.createTitledBorder("Taille du pinceau"));
         tailleCrayon.setMinorTickSpacing(2);
         tailleCrayon.setMajorTickSpacing(10);
         tailleCrayon.setPaintTicks(true);
