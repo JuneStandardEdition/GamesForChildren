@@ -15,9 +15,6 @@ import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
-
-
-
 /**
  *
  * @author Will I Am & June.QL (ça fait du bien à l'égo, mais j'ai bcp codé ici
@@ -78,6 +75,7 @@ public final class GlobalGUI extends JFrame {
         JMenuItem co = new JMenuItem("Se connecter");
         admin.add(co);
 
+        
         //listener pour se connecter
         co.addActionListener((ActionEvent ae) -> {
             Connection ct = null;
@@ -104,7 +102,7 @@ public final class GlobalGUI extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         });
-
+         
         // Adds Menus
         menu.add(dessin);
         menu.add(calcul);
