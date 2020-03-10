@@ -180,6 +180,16 @@ public class ArdoiseGUI extends JPanel implements ActionListener {
                     c = Color.WHITE;
                 }
         );
+
+        JButton supprimer = new JButton("effacer");
+        tb.add(supprimer, BorderLayout.EAST);
+
+        supprimer.addActionListener((ActionEvent ae) -> {
+
+            repaint();
+
+        });
+
         return tb; // retourner la barre d'outil
 
     }

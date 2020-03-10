@@ -3,6 +3,7 @@ package gui;
 import connections.SQLConnection;
 import static connections.SQLConnection.getPassword;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
@@ -66,17 +67,58 @@ public final class GlobalGUI extends JFrame {
         jtp.addChangeListener(changeListener);
 
         // Menus top of the JFrame
-        JMenuBar menu = new JMenuBar();
-        JMenu dessin = new JMenu("Dessin");
-        JMenu calcul = new JMenu("Calcul");
-        JMenu questions = new JMenu("Questions");
+        JMenuBar menuBar = new JMenuBar();
+        JMenu ludo = new JMenu("Ludothèque");
+        JMenuItem dessin = new JMenuItem("Dessiner");
+        dessin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                jtp.setSelectedIndex(0);
+            }
+        });
+        JMenuItem calcul = new JMenuItem("Calculer");
+        calcul.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                jtp.setSelectedIndex(1);
+            }
+        });
+        JMenuItem questions = new JMenuItem("Question / Réponse");
+        questions.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                jtp.setSelectedIndex(2);
+            }
+        });
+        ludo.add(dessin);
+        ludo.addSeparator();
+        ludo.add(calcul);
+        ludo.add(questions);
         JMenu settingsMenu = new JMenu("Paramètres");
+        JMenuItem settingsMenuItem = new JMenuItem("Panel paramètres");
+        settingsMenuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                jtp.setSelectedIndex(3);
+            }
+        });
+        settingsMenu.add(settingsMenuItem);
         JMenu admin = new JMenu("Administration");
+        JMenuItem adminMenuItem = new JMenuItem("Panel administration");
+        admin.addActionListener(new ActionListener() {
+            // Celui-ci ne semble pas fonctionner
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                jtp.setSelectedIndex(4);
+            }
+        });
+        admin.add(adminMenuItem);
+        admin.addSeparator();
         JMenuItem co = new JMenuItem("Se connecter");
         admin.add(co);
 
-        
-        //listener pour se connecter
+
+        // Listener pour se connecter
         co.addActionListener((ActionEvent ae) -> {
             Connection ct = null;
 
@@ -102,17 +144,25 @@ public final class GlobalGUI extends JFrame {
                         JOptionPane.ERROR_MESSAGE);
             }
         });
+
          
         // Adds Menus
-        menu.add(dessin);
-        menu.add(calcul);
-        menu.add(questions);
-        menu.add(settingsMenu);
-        menu.add(admin);
+        menuBar.add(dessin);
+        menuBar.add(calcul);
+        menuBar.add(questions);
+        menuBar.add(settingsMenu);
+        menuBar.add(admin);
+
+
+        // Adds submenus to menuBar
+        menuBar.add(ludo);
+        menuBar.add(settingsMenu);
+        menuBar.add(admin);
+
 
         // Adds content to JFrame and sets it visible
         f.add(jtp);
-        f.setJMenuBar(menu);
+        f.setJMenuBar(menuBar);
         f.setVisible(true);
     }
 
