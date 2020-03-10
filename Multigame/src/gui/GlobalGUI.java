@@ -2,8 +2,10 @@ package gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -16,6 +18,8 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import questions.Calcul;
 import questions.Question;
+import sqlconnection.SQLConnection;
+import static sqlconnection.SQLConnection.getPassword;
 
 /**
  *
@@ -72,11 +76,32 @@ public final class GlobalGUI extends JFrame {
         JMenu settingsMenu = new JMenu("Paramètres");
         JMenu admin = new JMenu("Administration");
         JMenuItem co = new JMenuItem("Se connecter");
-        admin.add(new JMenuItem("Se connecter"));
+        admin.add(co);
 
-        co.addActionListener((ae) -> {
-            if (ae.getSource() == co) {
-                System.out.println("PUTAIN");
+        //listener pour se connecter
+        co.addActionListener((ActionEvent ae) -> {
+            Connection ct = null;
+            
+            String mdp = (String) JOptionPane.showInputDialog(null,
+                    "Veuillez saisir le mot de passe : ",
+                    "CONNEXION",
+                    JOptionPane.PLAIN_MESSAGE,
+                    null,
+                    null,
+                    null
+            );
+            
+            if (mdp.equals(getPassword())) {
+                ct = SQLConnection.getInstance();
+                JOptionPane.showMessageDialog(null,
+                        "CONNECTE A LA BASE DE DONNEE",
+                        "SUCCESS !",
+                        JOptionPane.INFORMATION_MESSAGE);
+            }else {
+                JOptionPane.showMessageDialog(null,
+                        "ERREUR DE CONNECTION",
+                        "ERREUR !",
+                        JOptionPane.ERROR_MESSAGE);
             }
         });
 

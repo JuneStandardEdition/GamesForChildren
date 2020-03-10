@@ -12,7 +12,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import questions.*;
 
 /**
  * ************************************************
@@ -160,7 +159,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             //on remet le JTextField vide
             saisie_utilisateur.setText("");
             saisie_utilisateur.requestFocusInWindow();
-            labelQuestion.setText(genererIntitule());
+            labelQuestion.setText(genererIntitule());         
         });
 
         // Jpanel pour la saisie utilisateur
