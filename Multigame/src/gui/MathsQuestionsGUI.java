@@ -45,6 +45,8 @@ public abstract class MathsQuestionsGUI extends JPanel {
 
     public abstract String getCurrentAnswer();
 
+    public abstract boolean userEntryCheck(String userEntry);
+
     // Générique pour question ou calcul
     Object o;
 
@@ -105,7 +107,7 @@ public abstract class MathsQuestionsGUI extends JPanel {
             if (saisie_utilisateur.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
                         "ERREUR !", JOptionPane.PLAIN_MESSAGE);
-            } else if (saisie_utilisateur.getText().equals(getCurrentAnswer())) {
+            } else if (userEntryCheck(saisie_utilisateur.getText())) {
                 checker.setBackground(Color.GREEN);
                 checker.setEnabled(false);
                 solution.setEnabled(false);

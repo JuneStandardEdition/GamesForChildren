@@ -43,4 +43,9 @@ public class CalculGUI extends MathsQuestionsGUI {
         return s;
     }
 
+    @Override
+    public boolean userEntryCheck(String userEntry) {
+        return userEntry.equals(q.answer);
+    }
+
 }

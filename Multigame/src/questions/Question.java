@@ -80,7 +80,7 @@ public class Question {
     the user is the correct one.
     Returns true if correct, false if wrong
      */
-    boolean answerCheck(String rep) {
+    public boolean answerCheck(String rep) {
         return rep.toLowerCase()
                 .replaceAll("[â ä à]", "a")
                 .replaceAll("[é è ê ë]", "e")
