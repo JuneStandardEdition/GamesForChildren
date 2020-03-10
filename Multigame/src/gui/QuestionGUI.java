@@ -18,7 +18,8 @@ public class QuestionGUI extends MathsQuestionsGUI {
 
     public QuestionGUI(String title) {
         super(title);
-        q = new Question();
+        q = genererQuestion();
+        labelQuestion.setText(q.getQuestion());
     }
 
     @Override

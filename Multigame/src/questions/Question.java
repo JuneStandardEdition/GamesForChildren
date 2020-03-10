@@ -3,19 +3,23 @@ package questions;
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.5
+ * @version 0.1.6
  * @date 05-03-2020.09:38
  *
  *************************************************
  */
 public class Question {
 
-    Integer id = 0;
-    String question = "N/A ?";
-    String answer = "N/A";
-    Integer difficulty = 0;
+    public Integer id;
+    public String question;
+    public String answer;
+    public Integer difficulty;
 
     public Question() {
+        id = 0;
+        question = "N/A ?";
+        answer = "N/A";
+        difficulty = 0;
     }
 
     public Question(Integer id, String qst, String ans, Integer diff) {

@@ -6,52 +6,54 @@ import static settings.Settings.DIFFICULTE_1;
 /**
  * ************************************************
  * @author will.i.am
- * @version 0.1.2
+ * @version 0.1.3
  * @date 09-03-2020.9:33
  *
  *************************************************
  */
 public class Calcul {
 
-    public Integer nb1 = 0;
-    public Integer nb2 = 0;
-    public Integer result = 0;
-    public String signe = "";
+    public int nb1;
+    public int nb2;
+    public String signe;
+    public int result;
 
     public Calcul() {
+        nb1 = genererNb1();
+        nb2 = genererNb2();
+        signe = genererSigne();
+        result = genererResult();
     }
 
-    public Calcul(Integer nb1, Integer nb2, Integer resultat, String signe) {
+    public Calcul(int nb1, int nb2, int resultat, String signe) {
         this.nb1 = nb1;
         this.nb2 = nb2;
-        this.result = resultat;
         this.signe = signe;
+        this.result = resultat;
     }
 
     // Génération du nombre 1 selon la difficulté
     public int genererNb1() {
-        int i;
         Random rd = new Random();
+        int i = rd.nextInt(1000);
         /*if (DIFFICULTE_1) {
             i = rd.nextInt(10);
         } else {*/
-        i = rd.nextInt(1000);
         //}
         return i;
     }
 
     // Génération du nombre 2 selon la difficulté
     public int genererNb2() {
-        int i;
         Random rd = new Random();
-        if (DIFFICULTE_1) {
-            do {
+        int i = 0;
+        /*if (DIFFICULTE_1) {
+            while (i > nb1) {
                 i = rd.nextInt(9);
-            } while (i > nb1);
-
-        } else {
-            i = rd.nextInt(1000);
-        }
+            }
+        } else {*/
+        i = rd.nextInt(1000);
+        //}
         return i;
     }
 
@@ -91,7 +93,7 @@ public class Calcul {
     }
 
     // Fonction qui calcule le résultat en fonction des 2 nbrs tirés et du signe
-    public Integer genererResult() {
+    public int genererResult() {
         switch (signe) {
             case " + ":
                 result = nb1 + nb2;

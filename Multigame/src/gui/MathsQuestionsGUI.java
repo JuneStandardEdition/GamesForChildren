@@ -39,6 +39,12 @@ public abstract class MathsQuestionsGUI extends JPanel {
     JButton solution;
     JButton questionSuivante;
 
+    public abstract Question genererQuestion();
+
+    public abstract String genererIntitule();
+
+    public abstract String getCurrentAnswer();
+
     public MathsQuestionsGUI(String title) {
         super();
         setBorder(BorderFactory.createTitledBorder(title));
@@ -60,26 +66,28 @@ public abstract class MathsQuestionsGUI extends JPanel {
      */
     private void initGUI() {
 
+        // JPanel pour les intitulés
         questionPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        Font font = new Font("Arial", Font.BOLD, 50);
-        labelQuestion.setFont(font);
-
-        questionPane.add(labelQuestion);
-        // JPanel pour afficher les boutons d'options
-        // Appel fonction creerBoutons
+        // JPanel pour les boutons
         buttonsPane.setLayout(new FlowLayout(FlowLayout.CENTER));
-        checker.setPreferredSize(new Dimension(200, 75));
-        solution.setPreferredSize(new Dimension(200, 75));
-        questionSuivante.setPreferredSize(new Dimension(200, 75));
-        genererQuestion();
-        labelQuestion.setText(genererIntitule());
+        // JPanel pour la saisie
+        saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        // Config label texte pour les intitulés : font
+        labelQuestion.setFont(new Font("Arial", Font.BOLD, 26));
+        // Ajout de l'emplacement pour l'intitulé du problème (question ou calcul)
+        questionPane.add(labelQuestion);
+
+        // Appel fonction creerBoutons
+        checker.setPreferredSize(new Dimension(175, 75));
+        solution.setPreferredSize(new Dimension(175, 75));
+        questionSuivante.setPreferredSize(new Dimension(175, 75));
 
         // Ajout des boutons
         /**
          * Bouton VERIFICATION
          */
         buttonsPane.add(checker);
-        //ecouteur pour le bouton vérification
         checker.addActionListener((ActionEvent ae) -> {
             if (saisie_utilisateur.getText().equals("")) {
                 JOptionPane.showMessageDialog(null, "Vous n'avez saisi aucun resultat",
@@ -91,14 +99,11 @@ public abstract class MathsQuestionsGUI extends JPanel {
                 saisie_utilisateur.setText("");
             }
         });
+        buttonsPane.add(checker);
 
         /**
          * Bouton SOLUTION
          */
-        buttonsPane.add(solution);
-        //test evenement entré pour valider
-        //TODO
-        //ecouteur pour le bouton solution
         solution.addActionListener((ActionEvent ae) -> {
             // on remet la couleur du bouton par defaut
             checker.setBackground(Color.RED);
@@ -106,30 +111,29 @@ public abstract class MathsQuestionsGUI extends JPanel {
             // on remet le JTextField vide
             saisie_utilisateur.setText("La solution était : " + getCurrentAnswer());
         });
+        buttonsPane.add(solution);
 
         /**
          * Bouton SUIVANT
          */
-        buttonsPane.add(questionSuivante);
-        // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
-            //on remet la couleur du bouton par defaut
+            // On remet la couleur du bouton "Verifier" par défaut
             checker.setBackground(null);
 
-            //on remet le JTextField vide
+            // On remet le JTextField de saisie utilisateur vide + Focus
             saisie_utilisateur.setText("");
             saisie_utilisateur.requestFocusInWindow();
+            genererQuestion();
             labelQuestion.setText(genererIntitule());
         });
+        buttonsPane.add(questionSuivante);
 
         // Jpanel pour la saisie utilisateur
-        saisiePane.setLayout(new FlowLayout(FlowLayout.CENTER));
         JLabel reponse = new JLabel("Saisir la réponse : ", JLabel.CENTER);
-        Font font2 = new Font("Arial", Font.BOLD, 25);
-        reponse.setFont(font2);
+        reponse.setFont(new Font("Arial", Font.BOLD, 22));
 
-        saisie_utilisateur.setPreferredSize(new Dimension(200, 70));
-        saisie_utilisateur.setFont(font2);
+        saisie_utilisateur.setPreferredSize(new Dimension(150, 75));
+        saisie_utilisateur.setFont(new Font("Arial", Font.TRUETYPE_FONT, 24));
 
         saisiePane.add(reponse);
         saisiePane.add(saisie_utilisateur);
@@ -138,13 +142,5 @@ public abstract class MathsQuestionsGUI extends JPanel {
         add(questionPane);
         add(saisiePane);
         add(buttonsPane);
-
-        saisie_utilisateur.requestFocusInWindow();
     }
-
-    public abstract Question genererQuestion();
-
-    public abstract String genererIntitule();
-
-    public abstract String getCurrentAnswer();
 }

@@ -6,34 +6,35 @@ import questions.Question;
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.1
+ * @version 0.1.2
  * @date 09-03-2020.15:10
  *
  *************************************************
  */
 public class CalculGUI extends MathsQuestionsGUI {
 
-    Calcul c = new Calcul();
-    Question q = new Question();
+    public Calcul c;
+    public Question q;
 
     public CalculGUI(String title) {
         super(title);
-        c.genererNb1();
-        c.genererNb2();
-        c.genererSigne();
-        c.genererResult();
-        q.setQuestion(Integer.toString(c.nb1));
+        genererQuestion();
+        labelQuestion.setText(q.getQuestion());
     }
 
     @Override
     public Question genererQuestion() {
+        c = new Calcul();
+        q = new Question();
+        q.setId(0);
+        q.setQuestion(String.valueOf(c.nb1 + c.signe + c.nb2) + " = ");
+        q.setAnswer(String.valueOf(c.result));
         return q;
     }
 
     @Override
     public String genererIntitule() {
-        String s = q.getQuestion();
-        return s;
+        return q.getQuestion();
     }
 
     @Override
