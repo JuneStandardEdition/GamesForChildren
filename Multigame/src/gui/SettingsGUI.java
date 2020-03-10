@@ -3,7 +3,7 @@ package gui;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
-import static settings.Settings.DIFFICULTE_1;
+import settings.Settings;
 
 /**
  * ************************************************
@@ -15,15 +15,23 @@ import static settings.Settings.DIFFICULTE_1;
  */
 public class SettingsGUI extends JPanel {
 
+    static Settings Settings;
+
     public SettingsGUI() {
         // Calls for JPanel()
         super();
+        // Loads current Settings
+        Settings = new Settings();
+
         // Global pane for Settings tab
         setLayout(new GridLayout(5, 1));
 
+        JPanel mathsSetting = initLevelSelection("Calcul");
+        JPanel questionSetting = initLevelSelection("Question");
+
         // Adds JPanel to SettingsGUI
-        add(initLevelSelection("Calcul"));
-        add(initLevelSelection("Question"));
+        add(mathsSetting);
+        add(questionSetting);
     }
 
     /*
@@ -35,20 +43,28 @@ public class SettingsGUI extends JPanel {
         JPanel levelSelection = new JPanel();
         levelSelection.setLayout(new GridLayout(1, 3));
         JLabel gameNameLabel = new JLabel(gameLabel);
-        // Buttons to select level of diffculty (applied to every game)
+        // Buttons to select level of difficulty (applied to every game)
         ButtonGroup levelSelectionButtonGrp = new ButtonGroup();
         JRadioButton levelSelection1 = new JRadioButton("Niveau 1");
         levelSelection1.setSelected(true);
         JRadioButton levelSelection2 = new JRadioButton("Niveau 2");
-        // Ajouts ecouteurs pour les bouttons
-        levelSelection2.addActionListener((ActionEvent ae) -> {
-            DIFFICULTE_1 = !DIFFICULTE_1;
-        });
+
         levelSelection1.addActionListener((ActionEvent ae) -> {
-            DIFFICULTE_1 = true;
+            if (gameLabel.equals("Calcul")) {
+                Settings.setMathsDifficulty(1);
+            } else {
+                Settings.setQuestionsDifficulty(1);
+            }
+        });
+        levelSelection2.addActionListener((ActionEvent ae) -> {
+            if (gameLabel.equals("Calcul")) {
+                Settings.setMathsDifficulty(2);
+            } else {
+                Settings.setQuestionsDifficulty(2);
+            }
         });
 
-        // Adds JRadioButton to ButtonGroup (manages buttons comportement)
+        // Adds JRadioButton to ButtonGroup (manages behavior)
         levelSelectionButtonGrp.add(levelSelection1);
         levelSelectionButtonGrp.add(levelSelection2);
         // Adds components to pane

@@ -8,8 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import questions.Calcul;
-import questions.Question;
 
 /**
  *
