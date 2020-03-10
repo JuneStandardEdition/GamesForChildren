@@ -5,18 +5,20 @@ package gui;
  * @author marine
  */
 import java.awt.BorderLayout;
-import java.awt.Choice;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
+import java.awt.Point;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.util.ArrayList;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JColorChooser;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -24,105 +26,150 @@ import javax.swing.JPanel;
  * @param args the command line arguments
  *
  */
-public class ArdoiseGUI extends JPanel {
+public class ArdoiseGUI extends JPanel implements ActionListener {
 
-    JLabel label;
+    JLabel label; // les variables
     int x;
     int y;
+    Color c;
+    Integer size = 10;
+
+    String type;
+    ArrayList<Point> points = new ArrayList<Point>();// création d'une collection de points
+
+    private void setLabel(int x, int y) { // afficher le label avec les coordonnées de la souris
+        label.setText("x=" + x + ", y=" + y);
+    }
 
     public ArdoiseGUI() {
-        super();
+        super();//appelle le constructeur de la classe du dessus
 
         x = 0;
         y = 0;
+        type = "";
+        Point p = new Point();
         label = new JLabel();
-        setBorder(BorderFactory.createTitledBorder("Ardoise"));
+        setBorder(BorderFactory.createTitledBorder("Ardoise")); // on créer un JLabel Ardoise à notre JFrame
         setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-        add(initArdoiseGUI());
-        add(initToolbarGUI());
+        add(initArdoiseGUI()); // on appelle les fonctions initArdoise et initToolBar
+        add(initToolBarGUI());
 
     }
 
     public JPanel initArdoiseGUI() {
-
+// un JPanel container dans la JFrame et un JPanel dessin dans le JPanel container
         JPanel container = new JPanel();
         JPanel dessin = new JPanel();
-        dessin.setBackground(Color.white);
+        dessin.setBackground(Color.white); // couleur de fond initialisée à blanc
 
-        dessin.addMouseListener(new MouseAdapter() {
+        // les écouteurs
+        dessin.addMouseListener(
+                new MouseAdapter() {
             @Override
-            public void mousePressed(MouseEvent e) {
-
-                x = e.getX();
-                y = e.getY();
-                setLabel(x, y);
-            }
-        });
-        dessin.addMouseMotionListener(new MouseMotionAdapter() {
-
-            @Override
-            public void mouseDragged(MouseEvent e) {
+            public void mousePressed(MouseEvent e
+            ) { // on clique sur la souris
                 Graphics g = dessin.getGraphics();
+                g.setColor(c);// on récupère la couleur, les x et y
 
-                g.setColor(Color.black);
-                g.drawLine(x, y, e.getX(), e.getY());
                 x = e.getX();
                 y = e.getY();
                 setLabel(x, y);
 
+                if (type.equals("rond")) {// si le type est "rond", on compare la chaine de caractère type à "rond"
+                    g.fillOval(x, y, size, size);// alors on trace en rond (coordonnées et taille)
+                } else {
+                    g.fillRect(x, y, size, size);// sinon on trace en carré
+                }
+
             }
-        });
-        setLabel(x, y);
-        container.setLayout(new BorderLayout());
+        }
+        );
+
+        dessin.addMouseMotionListener(
+                new MouseMotionAdapter() {
+
+            @Override
+            public void mouseDragged(MouseEvent e
+            ) {// on clique sur la souris sans la lâcher
+                Graphics g = dessin.getGraphics(); // même chose que pour le "pressed"
+
+                g.setColor(c);
+                x = e.getX();
+                y = e.getY();
+
+                if (type.equals("rond")) {
+                    g.fillOval(x, y, size, size);
+                } else {
+                    g.fillRect(x, y, size, size);
+                }
+
+            }
+        }
+        );
+
+        container.setLayout(
+                new BorderLayout());// ajoute le container qui contient la zone de dessin à notre JPanel
         container.add(label, BorderLayout.SOUTH);
+
         container.add(dessin, BorderLayout.CENTER);
+
         return container;
     }
 
-    public JPanel initToolbarGUI() {
-        JPanel x = new JPanel();
-        Choice couleurs;
-        couleurs = new Choice();
-        JButton carre = new JButton("Forme Carrée");
-        x.add(carre, BorderLayout.EAST);
+    public JPanel initToolBarGUI() { // initialisation de la barre d'outil
 
-        JButton rond = new JButton("Forme Ronde");
-        x.add(rond, BorderLayout.EAST);
+        JPanel tb = new JPanel();
+        Graphics g = tb.getGraphics();
 
-        JButton palette = new JButton("palette de couleur");
-        x.add(palette, BorderLayout.EAST);
-        JColorChooser jcc = new JColorChooser();
-        jcc.getColor();
+        JButton palette = new JButton("palette de couleur");// mettre un écouteur sur le bouton "palette de couleur"
+        tb.add(palette, BorderLayout.EAST);// pour ouvrir une palette de couleur dans une fenêtre
 
-        x.add(jcc, BorderLayout.EAST);
+        palette.addActionListener(
+                (ActionEvent ae) -> {
+                    c = JColorChooser.showDialog(this, "Choisissez une couleur", Color.black);
+                }// la couleur initiale est noir
+        );
 
-        JButton effacer = new JButton("Gomme");
-        x.add(effacer, BorderLayout.EAST);
-        return x;
+        JButton rond = new JButton("rond"); // même chose que pour le bouton carré
+        tb.add(rond, BorderLayout.EAST);
+
+        rond.addActionListener(
+                (ActionEvent ae) -> {
+                    type = "rond";
+                }
+        );
+
+        JButton carre = new JButton("carré");
+        tb.add(carre, BorderLayout.EAST); // ajouter le bouton carré à la barre d'outil
+        Object[] elements = new Object[]{"2", "5", "7", "10", "15", "30"}; // créer une liste de taille
+        JComboBox listeTaille = new JComboBox(elements); // mettre cette liste dans une JComboBox
+        tb.add(listeTaille, BorderLayout.EAST);
+        listeTaille.addActionListener((ActionEvent ae) -> { // mettre un écouteur sur la JComboBox
+            size = Integer.parseInt((String) listeTaille.getSelectedItem()); // convertir la chaine de caractère en Integer
+
+        });
+        carre.addActionListener(
+                (ActionEvent ae) -> {
+                    type = "carré"; // définir le type du bouton carre "carré" pour gérer la condition dans "pressed" et "dragged"
+                }
+        );
+
+        JButton effacer = new JButton("Gomme"); // initialiser la couleur de la gomme à "blanc"
+        tb.add(effacer, BorderLayout.EAST);
+        effacer.setBackground(Color.WHITE);
+
+        effacer.addActionListener(
+                (ActionEvent ae) -> {
+                    c = Color.WHITE;
+                }
+        );
+        return tb; // retourner la barre d'outil
+
     }
 
-    private void setLabel(int x, int y) {
-        label.setText("x=" + x + ", y=" + y);
-    }
-
-    class Couleur implements ItemListener {
-
-        public void itemStateChanged(ItemEvent e) {
-            Color couleur;
-            String a = (String) e.getItem();
-            if (a.equals("noir")) {
-                couleur = Color.black;
-            } else if (a.equals("rouge")) {
-                couleur = Color.red;
-            } else if (a.equals("jaune")) {
-                couleur = Color.yellow;
-            } else if (a.equals("vert")) {
-                couleur = Color.green;
-            } else {
-                couleur = Color.pink;
-            }
-        }
-
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }
