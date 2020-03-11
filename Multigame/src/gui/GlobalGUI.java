@@ -62,10 +62,10 @@ public final class GlobalGUI extends JFrame {
         jtp.addTab("Calcul", (JPanel) maths);
         jtp.addTab("QnA", (JPanel) qust);
         jtp.addTab("Parametres", (JPanel) settings);
-        jtp.addTab("Admin", new AdminPanelGUI());
+        
         jtp.addChangeListener(changeListener);
 
-        // Menus top of the JFrame
+        // Menus top of the JFrame avec ecouteurs pr desactiver des boutons
         JMenuBar menuBar = new JMenuBar();
         JMenu ludo = new JMenu("Ludothèque");
         JMenuItem dessin = new JMenuItem("Dessiner");
@@ -135,6 +135,8 @@ public final class GlobalGUI extends JFrame {
                         "CONNECTE A LA BASE DE DONNEE",
                         "SUCCESS !",
                         JOptionPane.INFORMATION_MESSAGE);
+                jtp.addTab("Admin", new AdminPanelGUI());
+                
             } else {
                 JOptionPane.showMessageDialog(null,
                         "ERREUR DE CONNECTION",

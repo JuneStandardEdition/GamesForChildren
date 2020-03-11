@@ -62,9 +62,11 @@ public class Calcul {
             } while (i >= nb1);
         } else {
             i = rd.nextInt(1000);
-        }
+        }                
+
         return i;
     }
+
 
     //fonction pour générer le signe du calcul
     public String genererSigne() {
