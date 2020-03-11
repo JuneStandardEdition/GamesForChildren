@@ -143,6 +143,7 @@ public final class GlobalGUI extends JFrame {
             }
         });
 
+
         // Adds Menus
         /*
         menuBar.add(dessin);
@@ -151,7 +152,7 @@ public final class GlobalGUI extends JFrame {
         menuBar.add(settingsMenu);
         menuBar.add(admin);
          */
-        
+
         // Adds submenus to menuBar
         menuBar.add(ludo);
         menuBar.add(settingsMenu);
