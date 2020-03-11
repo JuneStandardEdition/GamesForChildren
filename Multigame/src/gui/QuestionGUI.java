@@ -15,8 +15,10 @@ import settings.Settings;
  */
 public class QuestionGUI extends MathsQuestionsGUI {
 
+    // La question qui sera utilisée à chaque coup de jeu
     Question q;
 
+    // Constructeur
     public QuestionGUI(String title) {
         super(title);
         q = genererQuestion();

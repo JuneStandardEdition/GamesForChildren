@@ -10,7 +10,7 @@ import questions.QuestionsDAO;
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.1
+ * @version 0.1.3
  * @date 05-03-2020.10:00
  *
  *************************************************
@@ -54,7 +54,6 @@ public class AdminPanelGUI extends JPanel {
         super();
 
         jcq = new JComboBox(qu.getAll().toArray());
-        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         choixActionBoutton = new JPanel();
 
@@ -79,11 +78,15 @@ public class AdminPanelGUI extends JPanel {
         level1 = new JRadioButton("Niveau 1");
         level2 = new JRadioButton("Niveau 2");
 
-        //
+        // Inits GUI
         initGUI();
     }
 
+    // Inits GUI for Admin Pane
     private void initGUI() {
+        setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
+        setBorder(BorderFactory.createTitledBorder("Administration"));
+
         //definition du component pour le Jpanel choixAction
         choixActionBoutton.setLayout(new FlowLayout(FlowLayout.CENTER));
 
@@ -106,7 +109,7 @@ public class AdminPanelGUI extends JPanel {
             Question q = (Question) jcq.getSelectedItem();
             //on recupere la question dans le textfield question
             questions.setText(q.getQuestion());
-            //on recupere la question dans le textfield question
+            //on recupere la reponse dans le textfield question
             reponse.setText(q.getAnswer());
             idtext.setText(q.getId().toString());
             ID = Integer.parseInt(idtext.getText());
@@ -144,7 +147,7 @@ public class AdminPanelGUI extends JPanel {
                 q.difficulty = 2;
             }
             q.id = ID;
-            
+
             qu.update(q);
         }));
 
@@ -181,13 +184,15 @@ public class AdminPanelGUI extends JPanel {
         level1.setSelected(true);
         gererDifficultee.add(level2);
 
+        jcq.setMaximumSize(new Dimension(500, 200));
+
         //ajout dans le jpanel
-        add(choixActionBoutton);
         add(jcq);
         add(gererQuestion);
         add(gererReponse);
         add(gererId);
         add(gererDifficultee);
+        add(choixActionBoutton);
     }
 
 }
