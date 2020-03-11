@@ -18,8 +18,7 @@ import javax.swing.event.ChangeListener;
 
 /**
  *
- * @author Will I Am & June.QL (ça fait du bien à l'égo, mais j'ai bcp codé ici
- * aussi)
+ * @author Will I Am & June.QL 
  */
 public final class GlobalGUI extends JFrame {
 
@@ -36,7 +35,7 @@ public final class GlobalGUI extends JFrame {
     public GlobalGUI() {
 
         JFrame f = new JFrame("Multi Game");
-        f.setSize(800, 600);
+        f.setSize(1000, 800);
         f.setResizable(false);
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -117,7 +116,6 @@ public final class GlobalGUI extends JFrame {
         JMenuItem co = new JMenuItem("Se connecter");
         admin.add(co);
 
-
         // Listener pour se connecter
         co.addActionListener((ActionEvent ae) -> {
             Connection ct = null;
@@ -145,20 +143,19 @@ public final class GlobalGUI extends JFrame {
             }
         });
 
-         
         // Adds Menus
+        /*
         menuBar.add(dessin);
         menuBar.add(calcul);
         menuBar.add(questions);
         menuBar.add(settingsMenu);
         menuBar.add(admin);
-
-
+         */
+        
         // Adds submenus to menuBar
         menuBar.add(ludo);
         menuBar.add(settingsMenu);
         menuBar.add(admin);
-
 
         // Adds content to JFrame and sets it visible
         f.add(jtp);
