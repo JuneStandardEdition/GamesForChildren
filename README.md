@@ -11,6 +11,6 @@ The app shall include:
 
 # Contributors
 
-Marine "marine777" Cerutti
-William "Will" Hoyez
-Quentin "June" Llopes
+- Marine "marine777" Cerutti,
+- William "Will" Hoyez,
+- Quentin "June" Llopes
