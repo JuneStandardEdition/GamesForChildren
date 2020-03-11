@@ -12,15 +12,16 @@ import java.util.logging.Logger;
 /**
  * ************************************************
  * @author June.QL
- * @version 0.1.1
+ * @version 0.1.2
  * @date 06-03-2020.8:45
  *
  *************************************************
  */
 public class QuestionsDAO implements DAO<Question> {
 
-   public ArrayList<Question> qdao = new ArrayList<>();
+    public ArrayList<Question> qdao = new ArrayList<>();
 
+    // Récupère toutes les questions depuis la BDD, stock dans qdao (ArrayList)
     public List<Question> getAll() {
         String sqlQuery = "SELECT * FROM questions";
         try (Statement stmt = CONNEXION.createStatement()) {
@@ -34,6 +35,7 @@ public class QuestionsDAO implements DAO<Question> {
         return qdao;
     }
 
+    // Récupère une question à un indice donné (ID)
     @Override
     public Question find(Integer id) {
         Question qst = null;
@@ -51,6 +53,7 @@ public class QuestionsDAO implements DAO<Question> {
         return qst;
     }
 
+    // Crée une question en BDD
     @Override
     public void create(Question q) {
         try {
@@ -65,6 +68,7 @@ public class QuestionsDAO implements DAO<Question> {
         }
     }
 
+    // Supprime une question de la BDD
     @Override
     public void delete(Integer id) {
         try {
@@ -77,6 +81,7 @@ public class QuestionsDAO implements DAO<Question> {
         }
     }
 
+    // Actualise une question en BDD
     @Override
     public void update(Question q) {
         try {

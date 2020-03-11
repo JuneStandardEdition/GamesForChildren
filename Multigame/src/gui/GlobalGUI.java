@@ -17,7 +17,6 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
- *
  * @author Will I Am & June.QL (ça fait du bien à l'égo, mais j'ai bcp codé ici
  * aussi)
  */
@@ -35,11 +34,16 @@ public final class GlobalGUI extends JFrame {
      */
     public GlobalGUI() {
 
+        // Global JFrame
         JFrame f = new JFrame("Multi Game");
+        // Sets size
         f.setSize(800, 600);
+        // Non-resizable
         f.setResizable(false);
+        // Exit on close
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        // BoxLayout
         this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         // Listener temporaire : Permet de voir en console le changement de tab
@@ -52,12 +56,14 @@ public final class GlobalGUI extends JFrame {
             }
         };
 
+        // Calls for other GUIs
         settings = new SettingsGUI();
         maths = new CalculGUI("Maths");
         qust = new QuestionGUI("QnA");
         ardoise = new ArdoiseGUI();
         admin = new AdminPanelGUI();
 
+        // Create TabbedPane (Tabs)
         jtp = new JTabbedPane();
         jtp.addTab("Ardoise", (JPanel) ardoise);
         jtp.addTab("Calcul", (JPanel) maths);
@@ -69,6 +75,7 @@ public final class GlobalGUI extends JFrame {
         // Menus top of the JFrame
         JMenuBar menuBar = new JMenuBar();
         JMenu ludo = new JMenu("Ludothèque");
+        // MenuItem Draw
         JMenuItem dessin = new JMenuItem("Dessiner");
         dessin.addActionListener(new ActionListener() {
             @Override
@@ -76,6 +83,7 @@ public final class GlobalGUI extends JFrame {
                 jtp.setSelectedIndex(0);
             }
         });
+        // MenuItem Maths
         JMenuItem calcul = new JMenuItem("Calculer");
         calcul.addActionListener(new ActionListener() {
             @Override
@@ -83,6 +91,7 @@ public final class GlobalGUI extends JFrame {
                 jtp.setSelectedIndex(1);
             }
         });
+        // MenuItem QnA
         JMenuItem questions = new JMenuItem("Question / Réponse");
         questions.addActionListener(new ActionListener() {
             @Override
@@ -90,10 +99,12 @@ public final class GlobalGUI extends JFrame {
                 jtp.setSelectedIndex(2);
             }
         });
+        // Adds MenuItem to Menu
         ludo.add(dessin);
         ludo.addSeparator();
         ludo.add(calcul);
         ludo.add(questions);
+        // Another Menu
         JMenu settingsMenu = new JMenu("Paramètres");
         JMenuItem settingsMenuItem = new JMenuItem("Panel paramètres");
         settingsMenuItem.addActionListener(new ActionListener() {

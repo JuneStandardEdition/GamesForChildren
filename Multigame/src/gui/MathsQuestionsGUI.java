@@ -39,16 +39,18 @@ public abstract class MathsQuestionsGUI extends JPanel {
     JButton solution;
     JButton questionSuivante;
 
+    // Génère une question (utilisé dans les listeners)
+    // Dans le cadre du calcul, le converti en question
     public abstract Question genererQuestion();
 
+    // Génère l'intitulé de la question en cours
     public abstract String genererIntitule();
 
+    // Génère la réponse de la question en cours (pour bouton solution)
     public abstract String getCurrentAnswer();
 
+    // Vérification du résultat quand il est validé par l'utilisateur
     public abstract boolean userEntryCheck(String userEntry);
-
-    // Générique pour question ou calcul
-    Object o;
 
     public MathsQuestionsGUI(String title) {
         super();
@@ -129,7 +131,6 @@ public abstract class MathsQuestionsGUI extends JPanel {
             // on remet le JTextField vide
             saisie_utilisateur.setText("La solution était : " + getCurrentAnswer());
         });
-
 
         // Ecouteur pour le bouton "Suivant"
         questionSuivante.addActionListener((ActionEvent ae) -> {
