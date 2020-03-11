@@ -117,7 +117,6 @@ public final class GlobalGUI extends JFrame {
         JMenuItem co = new JMenuItem("Se connecter");
         admin.add(co);
 
-
         // Listener pour se connecter
         co.addActionListener((ActionEvent ae) -> {
             Connection ct = null;
@@ -145,20 +144,10 @@ public final class GlobalGUI extends JFrame {
             }
         });
 
-         
-        // Adds Menus
-        menuBar.add(dessin);
-        menuBar.add(calcul);
-        menuBar.add(questions);
-        menuBar.add(settingsMenu);
-        menuBar.add(admin);
-
-
         // Adds submenus to menuBar
         menuBar.add(ludo);
         menuBar.add(settingsMenu);
         menuBar.add(admin);
-
 
         // Adds content to JFrame and sets it visible
         f.add(jtp);

@@ -5,7 +5,7 @@ import gui.GlobalGUI;
 /**
  * @author Le meilleur des groupes
  * @desc Application avec interface graphique, regroupant des jeux pour enfant.
- * @version 0.3.8: Admin Pane & Menu!
+ * @version 0.3.9: Admin Pane & Menus completed
  */
 public class MainClass {
 
